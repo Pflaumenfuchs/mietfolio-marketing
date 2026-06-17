@@ -56,6 +56,9 @@ const canonicalUrl = `${siteUrl}${canonicalPath === "/" ? "" : canonicalPath}`.r
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+
+    <!-- Simple Analytics -->
+    <script defer src="/simple-analytics-loader.js"></script>
   </head>
   <body>
     <slot />

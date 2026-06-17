@@ -1,0 +1,19 @@
+---
+interface Props {
+  className?: string;
+  fill?: boolean;
+  icon: string;
+  opsz?: number;
+  weight?: number;
+}
+
+const { className = "", fill = false, icon, opsz = 24, weight = 400 } = Astro.props;
+---
+<span
+  aria-hidden="true"
+  class={`material-symbols-outlined select-none shrink-0 ${className}`}
+  data-icon={icon}
+  style={{
+    fontVariationSettings: `'FILL' ${fill ? 1 : 0}, 'wght' ${weight}, 'GRAD' 0, 'opsz' ${opsz}`
+  }}
+/>

@@ -1,0 +1,70 @@
+{
+  "name": "Mietfolio",
+  "short_name": "Mietfolio",
+  "description": "Vermietung, Nebenkosten und Dokumente in einem System.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "browser"],
+  "background_color": "#ffffff",
+  "theme_color": "#006b5b",
+  "orientation": "portrait-primary",
+  "lang": "de",
+  "categories": ["business", "productivity", "finance"],
+  "shortcuts": [
+    {
+      "name": "Übersicht",
+      "short_name": "Übersicht",
+      "description": "Mietfolio-Übersicht öffnen",
+      "url": "/app",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Dokumente",
+      "short_name": "Dokumente",
+      "description": "Dokumentenverwaltung öffnen",
+      "url": "/dokumente",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Rauchmelder",
+      "short_name": "Rauchmelder",
+      "description": "Rauchmelderverwaltung öffnen",
+      "url": "/rauchmelder",
+      "icons": [
+        {
+          "src": "/icon-192x192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

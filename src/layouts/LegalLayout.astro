@@ -1,0 +1,86 @@
+---
+import Layout from "./Layout.astro";
+import BrandLogo from "../components/BrandLogo.astro";
+import { ArrowLeft } from "@lucide/astro";
+
+interface Props {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  pageTitle: string;
+  pageSubtitle: string;
+  updatedAt?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  pageTitle,
+  pageSubtitle,
+  updatedAt,
+} = Astro.props;
+
+const currentYear = new Date().getFullYear();
+const copyrightNotice = `© ${currentYear} Mietfolio. Alle Rechte vorbehalten.`;
+---
+<Layout title={title} description={description} canonicalPath={canonicalPath}>
+  <div class="min-h-screen bg-white font-body text-[#0b1422] antialiased selection:bg-[#bff3e5] selection:text-[#06231f]">
+    <header class="border-b border-[#dfe9e6] bg-white">
+      <div class="mx-auto flex h-16 max-w-[960px] items-center justify-between px-5 sm:px-8">
+        <a
+          class="inline-flex items-center gap-3 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4"
+          href="/"
+          aria-label="Mietfolio Startseite"
+        >
+          <BrandLogo
+            iconClassName="h-10 w-10 border border-[rgba(10,102,87,0.15)] shadow-[0_8px_24px_rgba(3,36,32,0.08)]"
+            textClassName="font-headline text-2xl font-black text-brand-wordmark"
+          />
+        </a>
+        <a
+          class="inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4"
+          href="/"
+        >
+          <ArrowLeft class="mr-2 h-4 w-4" />
+          Zur Startseite
+        </a>
+      </div>
+    </header>
+
+    <main class="mx-auto max-w-[960px] px-5 py-12 sm:px-8 sm:py-16">
+      <p class="font-label text-sm font-bold uppercase tracking-[0.18em] text-[#006b5b]">Rechtliches</p>
+      <h1 class="mt-3 break-words font-headline text-4xl font-black leading-tight text-[#0b1422] hyphens-auto sm:text-5xl">
+        {pageTitle}
+      </h1>
+      <p class="mt-5 max-w-2xl text-lg leading-8 text-[#5c6b74]">
+        {pageSubtitle}
+      </p>
+      {updatedAt && <p class="mt-4 text-sm font-semibold text-[#5c6b74]">Stand: {updatedAt}</p>}
+
+      <div class="mt-10">
+        <slot />
+      </div>
+    </main>
+
+    <footer class="border-t border-[#dfe9e6] bg-[#fbfdfc]">
+      <div class="mx-auto flex max-w-[960px] flex-col gap-4 px-5 py-8 text-sm text-[#5c6b74] sm:px-8 md:flex-row md:items-center md:justify-between">
+        <span>{copyrightNotice}</span>
+        <nav class="flex flex-wrap gap-5 font-label font-semibold">
+          <a class="transition hover:text-[#006b5b]" href="/datenschutz">
+            Datenschutz
+          </a>
+          <a class="transition hover:text-[#006b5b]" href="/impressum">
+            Impressum
+          </a>
+          <a class="transition hover:text-[#006b5b]" href="/agb">
+            AGB
+          </a>
+          <a class="transition hover:text-[#006b5b]" href="/kontakt">
+            Kontakt
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+</Layout>

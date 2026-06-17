@@ -1,0 +1,198 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BrandLogo from "../components/BrandLogo.astro";
+import { Mail, ShieldCheck, Send, ArrowLeft } from "@lucide/astro";
+
+const contactFormName = "mietfolio-contact";
+const currentYear = new Date().getFullYear();
+const copyrightNotice = `© ${currentYear} Mietfolio. Alle Rechte vorbehalten.`;
+
+// Handle submitted state on client-side or check search parameters at build/request time
+// But Netlify Forms redirect/submit will load page with query parameter.
+// We can use a client-side script or handle it dynamically if we are doing static generation.
+// Actually, standard static sites can read URL parameters using client-side JS or Astro.url.
+// If static, Astro.url is available at build time (empty params), so we must check it client-side or use Astro.url if SSR.
+// Since we build static, we can check searchParams client-side and show the success message.
+---
+<Layout
+  title="Kontakt | Mietfolio"
+  description="Kontaktformular für Fragen zu Mietfolio, Warteliste, Datenschutz und Support."
+  canonicalPath="/kontakt"
+>
+  <div class="min-h-screen bg-white font-body text-[#0b1422] antialiased selection:bg-[#bff3e5] selection:text-[#06231f]">
+    <header class="border-b border-[#dfe9e6] bg-white">
+      <div class="mx-auto flex h-16 max-w-[1080px] min-w-0 items-center justify-between gap-3 px-5 sm:px-8">
+        <a
+          class="inline-flex min-w-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4"
+          href="/"
+          aria-label="Mietfolio Startseite"
+        >
+          <BrandLogo
+            className="min-w-0"
+            iconClassName="h-9 w-9 border border-[rgba(10,102,87,0.15)] shadow-[0_8px_24px_rgba(3,36,32,0.08)] sm:h-10 sm:w-10"
+            textClassName="truncate font-headline text-xl font-black text-brand-wordmark sm:text-2xl"
+          />
+        </a>
+        <a
+          class="inline-flex shrink-0 items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4"
+          href="/"
+          aria-label="Zur Startseite"
+        >
+          <ArrowLeft class="h-4 w-4 min-[360px]:mr-2" />
+          <span class="hidden min-[360px]:inline">Startseite</span>
+        </a>
+      </div>
+    </header>
+
+    <main class="mx-auto grid max-w-[1080px] min-w-0 gap-10 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[0.82fr_1fr]">
+      <section class="min-w-0">
+        <p class="font-label text-sm font-bold uppercase tracking-[0.18em] text-[#006b5b]">Kontakt</p>
+        <h1 class="mt-4 max-w-2xl break-words font-headline text-4xl font-black leading-tight text-[#0b1422] sm:text-5xl">
+          Schreiben Sie uns direkt über das Formular.
+        </h1>
+        <p class="mt-6 max-w-2xl break-words text-lg leading-8 text-[#2d3d49]">
+          Nutzen Sie dieses Formular für Fragen zur Warteliste, zum bestehenden Konto, zu Datenschutzthemen oder zu
+          Mietfolio allgemein.
+        </p>
+
+        <div class="mt-10 hidden gap-4 sm:grid">
+          <div class="rounded-lg border border-[#dfe9e6] bg-[#fbfdfc] p-5">
+            <Mail class="h-6 w-6 text-[#006b5b]" stroke-width={2} />
+            <h2 class="mt-4 font-headline text-lg font-black text-[#0b1422]">Eine zentrale Anlaufstelle</h2>
+            <p class="mt-2 text-sm leading-6 text-[#5c6b74]">
+              Alle Kontaktlinks führen hierher, damit Anfragen mit Thema und Kontext sauber ankommen.
+            </p>
+          </div>
+          <div class="rounded-lg border border-[#dfe9e6] bg-[#fbfdfc] p-5">
+            <ShieldCheck class="h-6 w-6 text-[#006b5b]" stroke-width={2} />
+            <h2 class="mt-4 font-headline text-lg font-black text-[#0b1422]">Datenschutz bewusst</h2>
+            <p class="mt-2 text-sm leading-6 text-[#5c6b74]">
+              Senden Sie bitte nur Informationen, die für die Bearbeitung Ihrer Anfrage erforderlich sind.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="min-w-0 rounded-lg border border-[#dfe9e6] bg-[#fbfdfc] p-5 shadow-[0_18px_48px_rgba(14,36,43,0.06)] sm:p-7">
+        <div id="success-alert" class="hidden mb-6 rounded-lg border border-[#b8e3d7] bg-[#effaf6] p-4 text-sm font-semibold leading-6 text-[#006b5b]">
+          Danke, Ihre Nachricht wurde übermittelt.
+        </div>
+
+        <form
+          action="/kontakt?gesendet=1"
+          class="grid min-w-0 gap-5"
+          data-netlify="true"
+          method="POST"
+          name={contactFormName}
+        >
+          <input type="hidden" name="form-name" value={contactFormName} />
+
+          <div class="grid gap-2">
+            <label class="font-label text-sm font-bold text-[#0b1422]" for="contact-name">
+              Name
+            </label>
+            <input
+              class="h-12 w-full min-w-0 rounded-md border border-[#d7e3e0] bg-white px-4 text-base outline-none transition focus:border-[#006b5b] focus:ring-2 focus:ring-[#006b5b]/20"
+              id="contact-name"
+              name="name"
+              type="text"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="grid gap-2">
+            <label class="font-label text-sm font-bold text-[#0b1422]" for="contact-email">
+              E-Mail
+            </label>
+            <input
+              class="h-12 w-full min-w-0 rounded-md border border-[#d7e3e0] bg-white px-4 text-base outline-none transition focus:border-[#006b5b] focus:ring-2 focus:ring-[#006b5b]/20"
+              id="contact-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="grid gap-2">
+            <label class="font-label text-sm font-bold text-[#0b1422]" for="contact-topic">
+              Thema
+            </label>
+            <select
+              class="h-12 w-full min-w-0 rounded-md border border-[#d7e3e0] bg-white px-4 text-base outline-none transition focus:border-[#006b5b] focus:ring-2 focus:ring-[#006b5b]/20"
+              id="contact-topic"
+              name="topic"
+              required
+            >
+              <option value="Allgemeine Frage" selected>Allgemeine Frage</option>
+              <option value="Warteliste">Warteliste</option>
+              <option value="Bestehendes Konto">Bestehendes Konto</option>
+              <option value="Datenschutz">Datenschutz</option>
+              <option value="Technisches Problem">Technisches Problem</option>
+            </select>
+          </div>
+
+          <div class="grid gap-2">
+            <label class="font-label text-sm font-bold text-[#0b1422]" for="contact-message">
+              Nachricht
+            </label>
+            <textarea
+              class="min-h-36 w-full min-w-0 resize-y rounded-md border border-[#d7e3e0] bg-white px-4 py-3 text-base leading-7 outline-none transition focus:border-[#006b5b] focus:ring-2 focus:ring-[#006b5b]/20"
+              id="contact-message"
+              name="message"
+              required
+            ></textarea>
+          </div>
+
+          <label class="flex min-w-0 gap-3 text-sm leading-6 text-[#5c6b74]">
+            <input class="mt-1 h-4 w-4 shrink-0 accent-[#006b5b]" name="privacy_confirmed" type="checkbox" required />
+            <span class="min-w-0 break-words">
+              Ich habe die{" "}
+              <a class="font-semibold text-[#006b5b] underline-offset-4 hover:underline" href="/datenschutz">
+                Datenschutzhinweise
+              </a>{" "}
+              gelesen.
+            </span>
+          </label>
+
+          <button
+            class="inline-flex h-12 w-full min-w-0 items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_12px_28px_rgba(0,107,91,0.22)] transition hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4 sm:w-auto"
+            type="submit"
+          >
+            Nachricht senden
+            <Send class="ml-2 h-4 w-4" stroke-width={2.2} />
+          </button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="border-t border-[#dfe9e6] bg-[#fbfdfc]">
+      <div class="mx-auto flex max-w-[1080px] flex-col gap-4 px-5 py-8 text-sm text-[#5c6b74] sm:px-8 md:flex-row md:items-center md:justify-between">
+        <span>{copyrightNotice}</span>
+        <nav class="flex flex-wrap gap-5 font-label font-semibold">
+          <a class="transition hover:text-[#006b5b]" href="/datenschutz">
+            Datenschutz
+          </a>
+          <a class="transition hover:text-[#006b5b]" href="/impressum">
+            Impressum
+          </a>
+          <a class="transition hover:text-[#006b5b]" href="/agb">
+            AGB
+          </a>
+        </nav>
+      </div>
+    </footer>
+  </div>
+</Layout>
+
+<script>
+  // Show success alert if URL search param 'gesendet=1' is present
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('gesendet') === '1') {
+    const alertEl = document.getElementById('success-alert');
+    if (alertEl) {
+      alertEl.classList.remove('hidden');
+    }
+  }
+</script>

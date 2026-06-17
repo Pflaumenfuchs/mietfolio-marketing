@@ -1,0 +1,39 @@
+# Proxy routing rules to the React SPA (mietfolio-de.netlify.app)
+/auth                       https://mietfolio-de.netlify.app/auth                      200!
+/passwort-zuruecksetzen     https://mietfolio-de.netlify.app/passwort-zuruecksetzen    200!
+/mieter                     https://mietfolio-de.netlify.app/mieter                     200!
+/mieter/*                   https://mietfolio-de.netlify.app/mieter/:splat              200!
+/app                        https://mietfolio-de.netlify.app/app                        200!
+/app/*                      https://mietfolio-de.netlify.app/app/:splat                  200!
+/nebenkosten                https://mietfolio-de.netlify.app/nebenkosten                200!
+/nebenkosten/*              https://mietfolio-de.netlify.app/nebenkosten/:splat         200!
+/dokumente                  https://mietfolio-de.netlify.app/dokumente                  200!
+/dokumente/*                https://mietfolio-de.netlify.app/dokumente/:splat            200!
+/rauchmelder                https://mietfolio-de.netlify.app/rauchmelder                200!
+/rauchmelder/*              https://mietfolio-de.netlify.app/rauchmelder/:splat          200!
+/einstellungen              https://mietfolio-de.netlify.app/einstellungen              200!
+/einstellungen/*            https://mietfolio-de.netlify.app/einstellungen/:splat        200!
+/properties                 https://mietfolio-de.netlify.app/properties                 200!
+/properties/*               https://mietfolio-de.netlify.app/properties/:splat          200!
+/tenants                    https://mietfolio-de.netlify.app/tenants                    200!
+/tenants/*                  https://mietfolio-de.netlify.app/tenants/:splat             200!
+/messages                   https://mietfolio-de.netlify.app/messages                   200!
+/messages/*                 https://mietfolio-de.netlify.app/messages/:splat            200!
+/notifications              https://mietfolio-de.netlify.app/notifications              200!
+/notifications/*            https://mietfolio-de.netlify.app/notifications/:splat       200!
+/support                    https://mietfolio-de.netlify.app/support                    200!
+/support/*                  https://mietfolio-de.netlify.app/support/:splat             200!
+/onboarding                 https://mietfolio-de.netlify.app/onboarding                 200!
+/onboarding/*               https://mietfolio-de.netlify.app/onboarding/:splat          200!
+
+# SPA Assets and Service Worker
+/assets/*                   https://mietfolio-de.netlify.app/assets/:splat              200!
+/sw.js                      https://mietfolio-de.netlify.app/sw.js                      200!
+
+# Redirects
+/cookies                    /datenschutz#cookies-lokale-speicherung                    301!
+/cookie-einstellungen       /datenschutz#cookies-lokale-speicherung                    301!
+
+# Fallback for static marketing files (implicitly served by Netlify)
+# All other unhandled routes fall back to 404
+/*                          /404.html                                                  404

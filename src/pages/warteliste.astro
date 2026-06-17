@@ -1,0 +1,268 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BrandLogo from "../components/BrandLogo.astro";
+import { ArrowLeft, ArrowRight, CheckCircle2, Clock3, Mail, ShieldCheck } from "@lucide/astro";
+
+const currentYear = new Date().getFullYear();
+const copyrightNotice = `© ${currentYear} Mietfolio. Alle Rechte vorbehalten.`;
+
+const waitlistHighlights = [
+  {
+    icon: Clock3,
+    title: "Registrierung pausiert",
+    text: "Neue Konten werden aktuell gesammelt freigeschaltet.",
+  },
+  {
+    icon: Mail,
+    title: "Einladung per E-Mail",
+    text: "Sobald der nächste Zugang möglich ist, melden wir uns direkt.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Bestehende Konten bleiben erreichbar",
+    text: "Der Login für vorhandene Nutzer läuft weiterhin über die App.",
+  },
+] as const;
+---
+<Layout
+  title="Warteliste | Mietfolio"
+  description="Tragen Sie sich in die Mietfolio-Warteliste ein. Die Registrierung ist aktuell pausiert."
+  canonicalPath="/warteliste"
+>
+  <div class="min-h-screen bg-white font-body text-[#0b1422] antialiased selection:bg-[#bff3e5] selection:text-[#06231f]">
+    <header class="border-b border-[rgba(215,227,224,0.7)] bg-white/[0.94] backdrop-blur-xl">
+      <div class="mx-auto flex h-16 max-w-[1440px] items-center justify-between gap-3 px-4 sm:px-8 lg:px-12">
+        <a
+          class="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4"
+          href="/"
+          aria-label="Mietfolio Startseite"
+        >
+          <BrandLogo
+            iconClassName="h-9 w-9 border border-[rgba(10,102,87,0.15)] shadow-[0_8px_24px_rgba(3,36,32,0.08)] sm:h-10 sm:w-10"
+            textClassName="font-headline text-xl font-black text-brand-wordmark sm:text-2xl"
+          />
+        </a>
+        <div class="flex items-center gap-2 sm:gap-3">
+          <a class="hidden rounded-md px-3 py-2 font-label text-sm font-semibold text-[#2d3d49] transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4 sm:inline-flex" href="/auth">
+            Login
+          </a>
+          <a class="inline-flex h-10 items-center justify-center rounded-md border border-[#d7e3e0] bg-white px-3 font-label text-sm font-bold text-[#006b5b] shadow-[0_8px_22px_rgba(14,36,43,0.08)] transition hover:border-[#006b5b]/45 hover:bg-[#f7fbf9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4 sm:px-4" href="/">
+            <ArrowLeft class="mr-2 h-4 w-4" />
+            Zurück
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="relative overflow-hidden border-b border-[#dfe9e6] bg-[linear-gradient(120deg,#ffffff_0%,#ffffff_52%,#f3fbf8_100%)]">
+        <div class="mx-auto grid min-h-[calc(100svh-4rem)] w-full max-w-[1440px] items-center gap-6 px-5 py-8 sm:gap-10 sm:px-8 sm:py-12 lg:grid-cols-[0.92fr_0.78fr] lg:px-12 lg:py-16">
+          <div class="max-w-3xl">
+            <p class="font-label text-sm font-black uppercase tracking-[0.18em] text-[#006b5b]">
+              Warteliste
+            </p>
+            <h1 class="mt-4 max-w-[760px] font-headline text-[2.35rem] font-black leading-[1.03] text-[#0b1422] max-[359px]:text-[2.1rem] sm:mt-5 sm:text-5xl lg:text-7xl">
+              Registrierung ist aktuell pausiert.
+            </h1>
+            <p class="mt-4 max-w-2xl text-base leading-7 text-[#2d3d49] sm:mt-6 sm:text-xl sm:leading-8">
+              Mietfolio öffnet neue Zugänge schrittweise. Tragen Sie sich ein und wir melden uns, sobald der nächste
+              Zugang zur App möglich ist.
+            </p>
+
+            <div class="mt-10 hidden gap-4 md:grid md:grid-cols-3">
+              {waitlistHighlights.map(({ icon: Icon, title, text }) => (
+                <article class="border-t border-[#dfe9e6] pt-5">
+                  <Icon class="h-7 w-7 text-[#006b5b]" stroke-width={1.9} />
+                  <h2 class="mt-4 font-headline text-base font-extrabold text-[#0b1422]">{title}</h2>
+                  <p class="mt-2 text-sm leading-6 text-[#5c6b74]">{text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+
+          <div class="rounded-lg border border-[#dfe9e6] bg-white p-5 shadow-[0_28px_70px_rgba(14,36,43,0.12)] sm:p-8">
+            <div id="waitlist-success-container" class="hidden flex min-h-[420px] flex-col justify-center">
+              <span class="flex h-14 w-14 items-center justify-center rounded-full bg-[#e7f7f1] text-[#006b5b]">
+                <CheckCircle2 class="h-7 w-7" stroke-width={2.1} />
+              </span>
+              <h2 class="mt-7 font-headline text-3xl font-black leading-tight text-[#0b1422]">
+                Sie stehen auf der Warteliste.
+              </h2>
+              <p class="mt-4 text-base leading-7 text-[#5c6b74]">
+                Danke. Wir haben Ihre E-Mail-Adresse aufgenommen und melden uns, sobald die Registrierung wieder
+                geöffnet wird.
+              </p>
+              <a class="mt-8 inline-flex h-12 w-fit items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_18px_34px_rgba(0,107,91,0.22)] transition hover:-translate-y-0.5 hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4" href="/">
+                Zur Startseite
+                <ArrowRight class="ml-2 h-4 w-4" />
+              </a>
+            </div>
+
+            <div id="waitlist-form-container">
+              <h2 class="font-headline text-2xl font-black leading-tight text-[#0b1422]">
+                Zugang vormerken
+              </h2>
+              <p class="mt-3 text-sm leading-6 text-[#5c6b74]">
+                Wir verwenden Ihre Angaben nur für die Mietfolio-Warteliste.
+              </p>
+
+              <form id="waitlist-form" class="mt-6 grid gap-4 sm:mt-7 sm:gap-5">
+                <div class="hidden">
+                  <label for="website">Website</label>
+                  <input
+                    id="website"
+                    name="website"
+                    tabindex="-1"
+                    autocomplete="off"
+                    value=""
+                  />
+                </div>
+
+                <div class="grid gap-2">
+                  <label class="font-label text-sm font-bold text-[#2d3d49]" for="waitlist-name">
+                    Name
+                  </label>
+                  <input
+                    id="waitlist-name"
+                    name="name"
+                    autocomplete="name"
+                    class="h-12 rounded-md border border-[#d7e3e0] bg-white px-4 text-base text-[#0b1422] outline-none transition placeholder:text-[#7a8992] focus:border-[#006b5b] focus:ring-4 focus:ring-[#006b5b]/10"
+                    placeholder="Optional"
+                  />
+                </div>
+
+                <div class="grid gap-2">
+                  <label class="font-label text-sm font-bold text-[#2d3d49]" for="waitlist-email">
+                    E-Mail
+                  </label>
+                  <input
+                    id="waitlist-email"
+                    name="email"
+                    type="email"
+                    required
+                    autocomplete="email"
+                    class="h-12 rounded-md border border-[#d7e3e0] bg-white px-4 text-base text-[#0b1422] outline-none transition placeholder:text-[#7a8992] focus:border-[#006b5b] focus:ring-4 focus:ring-[#006b5b]/10"
+                    placeholder="name@beispiel.de"
+                  />
+                </div>
+
+                <div class="grid gap-2">
+                  <label class="font-label text-sm font-bold text-[#2d3d49]" for="portfolio-size">
+                    Größe des Portfolios
+                  </label>
+                  <select
+                    id="portfolio-size"
+                    name="portfolio_size"
+                    class="h-12 rounded-md border border-[#d7e3e0] bg-white px-4 text-base text-[#0b1422] outline-none transition focus:border-[#006b5b] focus:ring-4 focus:ring-[#006b5b]/10"
+                  >
+                    <option value="" selected>Optional auswählen</option>
+                    <option value="1 Einheit">1 Einheit</option>
+                    <option value="2-5 Einheiten">2-5 Einheiten</option>
+                    <option value="6-20 Einheiten">6-20 Einheiten</option>
+                    <option value="Mehr als 20 Einheiten">Mehr als 20 Einheiten</option>
+                  </select>
+                </div>
+
+                <div id="waitlist-error-message" class="hidden rounded-md border border-[#ffd4ce] bg-[#fff4f1] px-4 py-3 text-sm font-semibold leading-6 text-[#9a2a1a]"></div>
+
+                <button
+                  id="waitlist-submit-btn"
+                  type="submit"
+                  class="mt-1 inline-flex h-12 items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_18px_34px_rgba(0,107,91,0.22)] transition hover:-translate-y-0.5 hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
+                >
+                  <span id="btn-spinner" class="hidden mr-2 animate-spin">
+                    <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                  </span>
+                  Auf die Warteliste
+                  <ArrowRight class="ml-2 h-4 w-4" />
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</Layout>
+
+<script>
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const form = document.getElementById('waitlist-form') as HTMLFormElement;
+  const formContainer = document.getElementById('waitlist-form-container');
+  const successContainer = document.getElementById('waitlist-success-container');
+  const errorEl = document.getElementById('waitlist-error-message');
+  const submitBtn = document.getElementById('waitlist-submit-btn') as HTMLButtonElement;
+  const spinner = document.getElementById('btn-spinner');
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    if (!errorEl || !submitBtn || !spinner) return;
+
+    errorEl.classList.add('hidden');
+    errorEl.textContent = '';
+
+    const formData = new FormData(form);
+    const name = formData.get('name') as string;
+    const email = (formData.get('email') as string).trim().toLowerCase();
+    const portfolioSize = formData.get('portfolio_size') as string;
+    const website = formData.get('website') as string;
+
+    if (!emailPattern.test(email)) {
+      errorEl.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    // Honeypot check
+    if (website) {
+      // Treat as success but do nothing to trick bots
+      formContainer?.classList.add('hidden');
+      successContainer?.classList.remove('hidden');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    spinner.classList.remove('hidden');
+
+    try {
+      // Get config vars or fallbacks
+      const supabaseUrl = (import.meta as any).env.PUBLIC_SUPABASE_URL || 'https://hnuooocdengtgfvgfnga.supabase.co';
+      const anonKey = (import.meta as any).env.PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_ZJel7zeoN_61hKMqE9nmCA_PnZCAh-m';
+
+      const response = await fetch(`${supabaseUrl}/functions/v1/join-waitlist`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${anonKey}`,
+          'apikey': anonKey
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          portfolio_size: portfolioSize,
+          website: '', // Real value is empty
+          source: 'waitlist-page',
+          referrer: document.referrer || null,
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        throw new Error(data.error || 'Die Warteliste ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal.');
+      }
+
+      formContainer?.classList.add('hidden');
+      successContainer?.classList.remove('hidden');
+    } catch (err: any) {
+      errorEl.textContent = err.message || 'Die Warteliste ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal.';
+      errorEl.classList.remove('hidden');
+    } finally {
+      submitBtn.disabled = false;
+      spinner.classList.add('hidden');
+    }
+  });
+</script>

@@ -1,0 +1,94 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import Section from "../components/Section.astro";
+
+const legalContact = {
+  operator: "Sebastian Taatz Consulting UG (haftungsbeschränkt)",
+  legalForm: "Unternehmergesellschaft (haftungsbeschränkt)",
+  addressLine1: "Raiffeisenstraße 2",
+  addressLine2: "97209 Veitshöchheim",
+  country: "Deutschland",
+  domain: "mietfolio.de",
+  email: "kontakt@mietfolio.de",
+  phone: "+49 15567 113162",
+  vatId: "DE349795476",
+  registerCourt: "Amtsgericht Würzburg",
+  registerNumber: "HRB 16857",
+  representedBy: "Sebastian Taatz",
+  responsiblePerson: "Sebastian Taatz, Geschäftsführer",
+  dispute: "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+};
+---
+<LegalLayout
+  title="Impressum | Mietfolio"
+  description="Impressum und Anbieterkennzeichnung von Mietfolio."
+  canonicalPath="/impressum"
+  pageTitle="Impressum"
+  pageSubtitle="Anbieterkennzeichnung für die Website, die Web-App und alle damit verbundenen Mietfolio-Dienste."
+>
+  <Section title="Angaben gemäß § 5 DDG / § 18 MStV">
+    <p>
+      <strong>Anbieter:</strong> {legalContact.operator}
+      <br />
+      <strong>Rechtsform:</strong> {legalContact.legalForm}
+      <br />
+      <strong>Anschrift:</strong> {legalContact.addressLine1}
+      <br />
+      {legalContact.addressLine2}
+      <br />
+      {legalContact.country}
+    </p>
+    <p>
+      <strong>Domain:</strong> {legalContact.domain}
+      <br />
+      <strong>E-Mail:</strong>{" "}
+      <a class="font-semibold text-[#006b5b] underline-offset-4 hover:underline" href="/kontakt">
+        {legalContact.email}
+      </a>
+      <br />
+      <strong>Telefon:</strong> {legalContact.phone}
+    </p>
+  </Section>
+
+  <Section title="Vertretung, Register- und Steuerangaben">
+    <p>
+      <strong>Vertreten durch:</strong> {legalContact.representedBy}
+      <br />
+      <strong>Registergericht:</strong> {legalContact.registerCourt}
+      <br />
+      <strong>Registernummer:</strong> {legalContact.registerNumber}
+      <br />
+      <strong>Umsatzsteuer-ID:</strong> {legalContact.vatId}
+    </p>
+  </Section>
+
+  <Section title="Verantwortlicher im Sinne des § 18 Abs. 2 MStV">
+    <p>
+      <strong>Name der verantwortlichen Person:</strong> {legalContact.responsiblePerson}
+    </p>
+  </Section>
+
+  <Section title="Haftung für Inhalte und Links">
+    <p>
+      Die Inhalte dieser Website und App wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
+      Aktualität der Inhalte kann gleichwohl keine Gewähr übernommen werden, soweit gesetzlich zulässig.
+      Mietfolio enthält Verweise auf externe Websites oder Dienste Dritter; für deren Inhalte ist ausschließlich
+      der jeweilige Anbieter verantwortlich. Bei Bekanntwerden rechtswidriger Inhalte entfernen wir entsprechende
+      Verlinkungen.
+    </p>
+  </Section>
+
+  <Section title="Urheberrecht">
+    <p>
+      Die durch den Anbieter erstellten Inhalte, Texte, Oberflächen, Markenbestandteile und sonstigen Werke
+      unterliegen dem deutschen Urheberrecht. Eine Vervielfältigung, Bearbeitung, Verbreitung oder sonstige Nutzung
+      außerhalb gesetzlicher Schranken bedarf der vorherigen Zustimmung des Rechteinhabers.
+    </p>
+  </Section>
+
+  <Section title="Verbraucherstreitbeilegung">
+    <p>
+      {legalContact.dispute}
+    </p>
+  </Section>
+</LegalLayout>

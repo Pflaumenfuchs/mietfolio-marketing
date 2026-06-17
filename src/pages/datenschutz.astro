@@ -1,0 +1,344 @@
+---
+import LegalLayout from "../layouts/LegalLayout.astro";
+import Section from "../components/Section.astro";
+
+const legalUpdatedAt = "15.06.2026";
+
+const legalContact = {
+  operator: "Sebastian Taatz Consulting UG (haftungsbeschränkt)",
+  addressLine1: "Raiffeisenstraße 2",
+  addressLine2: "97209 Veitshöchheim",
+  email: "kontakt@mietfolio.de",
+  privacyEmail: "kontakt@mietfolio.de",
+};
+
+const legalProviders = {
+  supabase: {
+    processor: "Supabase (Authentifizierung, Datenbank, Speicher, Edge Functions)",
+    company: "Supabase, Inc.",
+    region: "Primäre Projektregion: eu-central-1 (Frankfurt); Anbieter- und Supportvorgänge können nach Anbieterbedingungen weitere Standorte betreffen.",
+    dpa: "https://supabase.com/legal/dpa",
+  },
+  hosting: {
+    provider: "Netlify, Inc.",
+    service: "Hosting, CDN-Auslieferung, technische Bereitstellung und serverseitige Web Analytics",
+    privacy: "https://www.netlify.com/privacy/",
+  },
+  simpleAnalytics: {
+    provider: "Simple Analytics B.V.",
+    service: "Cookieless Webanalyse der öffentlichen Website mit aggregierten Reichweitenmetriken",
+    privacy: "https://www.simpleanalytics.com/privacy-policy",
+    docs: "https://docs.simpleanalytics.com/privacy",
+  },
+  google: {
+    provider: "Google Ireland Limited / Google LLC",
+    service: "Google Fonts und Google Gemini API für optionale Dokumentenanalyse",
+    privacy: "https://policies.google.com/privacy",
+  },
+};
+---
+<LegalLayout
+  title="Datenschutzerklärung | Mietfolio"
+  description="Datenschutzhinweise zur Website und Web-App Mietfolio."
+  canonicalPath="/datenschutz"
+  pageTitle="Datenschutzerklärung"
+  pageSubtitle="Datenschutzhinweise für die öffentliche Website, Registrierung und Nutzung der Mietfolio-Web-App."
+  updatedAt={legalUpdatedAt}
+>
+  <Section title="1. Verantwortlicher im Sinne der DSGVO">
+    <p>
+      Verantwortlich für die Verarbeitung personenbezogener Daten ist:
+      <br />
+      <strong>{legalContact.operator}</strong>
+      <br />
+      <strong>Anschrift:</strong> {legalContact.addressLine1}, {legalContact.addressLine2}
+      <br />
+      <strong>E-Mail:</strong>{" "}
+      <a class="font-semibold text-[#006b5b] underline-offset-4 hover:underline" href="/kontakt">
+        {legalContact.email}
+      </a>
+      <br />
+      <strong>Kontakt für Datenschutzanfragen:</strong>{" "}
+      <a class="font-semibold text-[#006b5b] underline-offset-4 hover:underline" href="/kontakt">
+        {legalContact.privacyEmail}
+      </a>
+    </p>
+  </Section>
+
+  <Section title="2. Überblick über Daten, Zwecke und betroffene Personen">
+    <p>
+      Wir verarbeiten personenbezogene Daten nur, soweit dies für Betrieb, Sicherheit, Registrierung,
+      Vertragserfüllung, Support oder gesetzliche Pflichten erforderlich ist. Betroffen sind Websitebesucher,
+      registrierte Nutzer sowie Personen, deren Daten Nutzer in Mietfolio verwalten, z. B. Mieter oder
+      Ansprechpartner.
+    </p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Nutzungs-, Meta- und Kommunikationsdaten wie IP-Adresse, Geräte-/Browserdaten, Zugriffszeit und Referrer.</li>
+      <li>Wartelistendaten wie E-Mail-Adresse, optionaler Name, Portfolio-Größe und Anmeldezeitpunkt.</li>
+      <li>Accountdaten wie E-Mail-Adresse, Authentifizierungsdaten, Sicherheitsereignisse und Passwort-Reset-Status.</li>
+      <li>App-Inhalte wie Immobilien, Nebenkosten, Zählerstände, Dokumente, Bilder, Rauchmelderdaten, Mieter, Nachrichten, Notizen, Erinnerungen und Exporte.</li>
+      <li>Kontaktinhalte, wenn Sie uns über das Kontaktformular kontaktieren.</li>
+    </ul>
+  </Section>
+
+  <Section title="3. Maßgebliche Rechtsgrundlagen">
+    <p>Die Verarbeitung erfolgt insbesondere auf Grundlage folgender Vorschriften:</p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Art. 6 Abs. 1 lit. b DSGVO für Registrierung, Nutzerkonto, App-Funktionen und Support im Rahmen des Nutzungsvertrags.</li>
+      <li>Art. 6 Abs. 1 lit. f DSGVO für IT-Sicherheit, Missbrauchsprävention, Fehleranalyse, stabile Bereitstellung und berechtigte Produktverbesserung.</li>
+      <li>Art. 6 Abs. 1 lit. c DSGVO, wenn gesetzliche Aufbewahrungs-, Nachweis- oder Auskunftspflichten bestehen.</li>
+      <li>Art. 6 Abs. 1 lit. a DSGVO, sofern wir künftig optionale Einwilligungsfunktionen einführen.</li>
+    </ul>
+  </Section>
+
+  <Section title="4. Sicherheitsmaßnahmen">
+    <p>
+      Mietfolio nutzt technische und organisatorische Maßnahmen nach Art. 32 DSGVO, um Vertraulichkeit, Integrität
+      und Verfügbarkeit zu schützen. Dazu gehören HTTPS-Transportverschlüsselung, private Datenbank- und
+      Storage-Berechtigungen, rollen- und nutzerbezogene Zugriffskontrollen, serverseitige Eingabeprüfungen,
+      Rate-Limits für KI-Funktionen sowie Schutzmechanismen gegen unbefugten Zugriff.
+    </p>
+  </Section>
+
+  <Section title="5. Bereitstellung der Website und Webhosting">
+    <p>
+      Beim Aufruf der Website werden technische Informationen verarbeitet, um Seiten auszuliefern, Missbrauch zu
+      erkennen, Fehler zu analysieren und die Stabilität sicherzustellen. Das Frontend wird über Netlify
+      bereitgestellt; App-Daten und Backend-Funktionen laufen über Supabase.
+    </p>
+    <p>
+      Für die öffentliche Website nutzen wir datensparsame Reichweitenmessung ohne Analyse-Cookies. Netlify Web
+      Analytics wertet Abrufdaten serverseitig aus. Simple Analytics wird nur auf öffentlichen Website-Routen
+      geladen und nach Anbieterangaben ohne Cookies, Local Storage, Geräte-Fingerprinting oder Speicherung von
+      IP-Adressen betrieben. Geschützte App- und Mieterbereiche sind in der Simple-Analytics-Einbindung
+      ausgeschlossen.
+    </p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Server-Logdaten können IP-Adresse, Datum/Uhrzeit, aufgerufene URL, Referrer, User-Agent, HTTP-Status und technische Abrufdaten enthalten.</li>
+      <li>Website-Analyse: aggregierte Seitenaufrufe, Referrer, Länder-/Zeitzonen- und Geräteklassen ohne Nutzerprofile oder Werbetracking.</li>
+      <li>Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO.</li>
+      <li>Netlify kann Inhalte über ein globales CDN ausliefern; Drittlandübermittlungen erfolgen nach Anbieterbedingungen und geeigneten Garantien.</li>
+    </ul>
+  </Section>
+
+  <Section title="6. Externe Schriftarten und Website-Ressourcen">
+    <p>
+      Die Website bindet Google Fonts und Material Symbols über Google-Server ein. Dabei kann Ihr Browser
+      Verbindungsdaten an Google übermitteln, insbesondere IP-Adresse, Browserinformationen und die abgerufene
+      Schriftressource. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser Interesse an einer konsistenten,
+      performanten Darstellung der Benutzeroberfläche.
+    </p>
+    <p>
+      Anbieter: {legalProviders.google.provider}. Weitere Informationen:{" "}
+      <a class="underline underline-offset-4" href={legalProviders.google.privacy} target="_blank" rel="noopener noreferrer">
+        Google-Datenschutzhinweise
+      </a>
+      .
+    </p>
+  </Section>
+
+  <Section title="7. Warteliste, Registrierung, Authentifizierung und Konto">
+    <p>
+      Solange die Registrierung pausiert ist, können Interessenten sich auf die Warteliste eintragen. Wir
+      verarbeiten dabei die E-Mail-Adresse, optional den Namen, optional die Portfolio-Größe sowie technische
+      Metadaten zur Übermittlung. Zweck ist die Vormerkung und Benachrichtigung, sobald neue Zugänge
+      freigeschaltet werden. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 6
+      Abs. 1 lit. f DSGVO für Betrieb und Missbrauchsprävention. Eine Abmeldung oder Löschung ist jederzeit über
+      das Kontaktformular möglich.
+    </p>
+    <p>
+      Für die Registrierung, Anmeldung, Passwortzurücksetzung und Kontoverwaltung verarbeiten wir Account-,
+      Authentifizierungs- und Sicherheitsdaten. Die technische Umsetzung erfolgt über Supabase Auth.
+    </p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Erforderliche Daten: E-Mail-Adresse, verschlüsselte Authentifizierungsinformationen, Session- und Sicherheitsdaten.</li>
+      <li>Zwecke: Kontoanlage, Login, Schutz vor Missbrauch, Passwort-Reset, Kontolöschung und DSGVO-Export.</li>
+      <li>Rechtsgrundlagen: Art. 6 Abs. 1 lit. b und lit. f DSGVO.</li>
+    </ul>
+  </Section>
+
+  <Section title="8. Nutzung der Mietfolio-App">
+    <p>
+      In der App verarbeiten wir die Daten, die Nutzer selbst eingeben, hochladen oder erzeugen. Dazu gehören
+      insbesondere Immobilien- und Objektdaten, Nebenkostenpositionen, Zählerstände, Dokumente, Rauchmelderdaten,
+      Mieterdaten, Nachrichten, Notizen, Erinnerungen und Exportdateien.
+    </p>
+    <p>
+      Diese Verarbeitung dient der Bereitstellung der Mietverwaltungsfunktionen. Wenn Nutzer personenbezogene Daten
+      Dritter eintragen, sind sie für deren rechtmäßige Erhebung, Nutzung und Information verantwortlich.
+    </p>
+  </Section>
+
+  <Section title="9. Dokumente, Bilder und Exporte">
+    <p>
+      Hochgeladene Dokumente und Bilder werden im Supabase Storage gespeichert und mit Metadaten in der Datenbank
+      verknüpft. ZIP- und PDF-Exporte werden auf Nutzeranforderung erzeugt. Dokumente können personenbezogene oder
+      mietbezogene Informationen enthalten; Nutzer entscheiden selbst, welche Inhalte sie hochladen.
+    </p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Zwecke: Dokumentenablage, Kategorisierung, Vorschau, Export und Nachweisführung.</li>
+      <li>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO; ergänzend Art. 6 Abs. 1 lit. f DSGVO für Sicherheit und Fehleranalyse.</li>
+    </ul>
+  </Section>
+
+  <Section title="10. KI-gestützte Dokumentenverarbeitung">
+    <p>
+      Mietfolio kann Dokumente oder Bilder auf Wunsch des Nutzers analysieren, um Kategorien, Beträge, Zeiträume,
+      Rauchmelderinformationen oder andere strukturierte Daten vorzuschlagen. Die Analyse wird nur ausgelöst, wenn
+      der Nutzer die entsprechende Funktion nutzt.
+    </p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Technischer Ablauf: Supabase Edge Functions prüfen die Anfrage und rufen die Google Gemini API auf.</li>
+      <li>Übermittelte Daten: die für die konkrete Analyse erforderlichen Dokument- oder Bildinhalte sowie technische Metadaten.</li>
+      <li>Zweck: Extraktion und Vorstrukturierung von Daten; keine rechtliche oder steuerliche Bewertung.</li>
+      <li>Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO.</li>
+    </ul>
+    <p>
+      KI-Ergebnisse sind Vorschläge und können fehlerhaft sein. Nutzer müssen die Ergebnisse prüfen, bevor sie sie
+      übernehmen oder weiterverwenden.
+    </p>
+  </Section>
+
+  <Section title="11. Eingesetzte Dienstleister">
+    <p>Für Betrieb, Sicherheit und App-Funktionen setzen wir insbesondere folgende Dienste ein:</p>
+    <ul class="list-disc space-y-3 pl-6">
+      <li>
+        <strong>{legalProviders.supabase.company}:</strong> {legalProviders.supabase.processor}.
+        <br />
+        {legalProviders.supabase.region}
+        <br />
+        <a class="underline underline-offset-4" href={legalProviders.supabase.dpa} target="_blank" rel="noopener noreferrer">
+          AVV / DPA
+        </a>
+      </li>
+      <li>
+        <strong>{legalProviders.hosting.provider}:</strong> {legalProviders.hosting.service}.
+        <br />
+        <a class="underline underline-offset-4" href={legalProviders.hosting.privacy} target="_blank" rel="noopener noreferrer">
+          Datenschutzhinweise von Netlify
+        </a>
+      </li>
+      <li>
+        <strong>{legalProviders.simpleAnalytics.provider}:</strong> {legalProviders.simpleAnalytics.service}.
+        <br />
+        <a class="underline underline-offset-4" href={legalProviders.simpleAnalytics.privacy} target="_blank" rel="noopener noreferrer">
+          Datenschutzhinweise von Simple Analytics
+        </a>
+        {" · "}
+        <a class="underline underline-offset-4" href={legalProviders.simpleAnalytics.docs} target="_blank" rel="noopener noreferrer">
+          Technische Datenschutzangaben
+        </a>
+      </li>
+      <li>
+        <strong>{legalProviders.google.provider}:</strong> {legalProviders.google.service}.
+        <br />
+        <a class="underline underline-offset-4" href={legalProviders.google.privacy} target="_blank" rel="noopener noreferrer">
+          Datenschutzhinweise von Google
+        </a>
+      </li>
+    </ul>
+  </Section>
+
+  <Section id="cookies-lokale-speicherung" title="12. Cookies, lokale Speicherung und § 25 TDDDG">
+    <p>
+      Mietfolio setzt derzeit keine Marketing-, Retargeting-, Social-Media- oder Analyse-Cookies ein. Die
+      eingesetzte Website-Analyse arbeitet ohne eigene Cookies oder vergleichbare Browser-Speicherung. Für den
+      Betrieb werden nur technisch notwendige Speichermechanismen verwendet. Soweit Informationen im Endgerät
+      gespeichert oder ausgelesen werden, geschieht dies für ausdrücklich angeforderte Funktionen oder die
+      technische Bereitstellung des Dienstes gemäß § 25 Abs. 2 TDDDG.
+    </p>
+    <ul class="list-disc space-y-3 pl-6">
+      <li>
+        <strong>localStorage:</strong> <code>mietfolio.active-property-id</code> (zuletzt gewähltes Objekt),
+        <br />
+        <code>sb-*-auth-token</code> (Supabase-Session), sofern der Browser dies lokal speichert.
+      </li>
+      <li>
+        <strong>Cookie:</strong> <code>sidebar:state</code> (UI-Zustand der Navigation), Aufbewahrung max.
+        7 Tage.
+      </li>
+      <li>
+        <strong>Browser-/CDN-Cache:</strong> statische App-Dateien, Schriftarten, Icons und Medien können durch
+        Browser oder CDN zwischengespeichert werden.
+      </li>
+      <li>
+        <strong>Cookieless Webanalyse:</strong> Netlify Web Analytics und Simple Analytics setzen in dieser
+        Konfiguration keine Analyse-Cookies, kein Local Storage und keine Werbe- oder Profiling-IDs.
+      </li>
+    </ul>
+  </Section>
+
+  <Section title="13. Kontaktaufnahme">
+    <p>
+      Wenn Sie uns über das Kontaktformular kontaktieren, verarbeiten wir Ihre Absenderadresse, den
+      Nachrichteninhalt, das gewählte Thema und technische Übermittlungsdaten zur Bearbeitung Ihrer Anfrage.
+      Rechtsgrundlage ist je nach Inhalt Art. 6 Abs. 1 lit. b oder lit. f DSGVO. Die Übermittlung erfolgt über
+      den Website-Betrieb und wird nur zur Bearbeitung der Anfrage genutzt.
+    </p>
+  </Section>
+
+  <Section title="14. Speicherdauer, Export und Löschung">
+    <p>
+      Personenbezogene Daten werden nur so lange gespeichert, wie dies für die jeweiligen Zwecke, gesetzliche
+      Pflichten oder berechtigte Interessen erforderlich ist. Registrierte Nutzer können in der App einen
+      DSGVO-Export erstellen und die Löschung ihres Kontos anstoßen. Nach Löschung können einzelne Daten noch in
+      technischen Sicherungen oder Protokollen verbleiben, bis reguläre Sicherungs- und Aufbewahrungsfristen
+      ablaufen.
+    </p>
+  </Section>
+
+  <Section title="15. Drittlandübermittlungen">
+    <p>
+      Einige Dienstleister haben Sitz oder Infrastruktur außerhalb der EU/des EWR. Übermittlungen erfolgen, soweit
+      erforderlich, auf Grundlage geeigneter Garantien wie Auftragsverarbeitungsverträgen,
+      Standardvertragsklauseln oder sonstigen anerkannten Transfermechanismen.
+    </p>
+  </Section>
+
+  <Section title="16. Automatisierte Entscheidungen">
+    <p>
+      Eine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO findet nicht statt. KI-Funktionen liefern
+      nur Arbeitserleichterungen und Vorschläge; sie treffen keine verbindlichen Entscheidungen über Nutzer,
+      Mieter oder sonstige Personen.
+    </p>
+  </Section>
+
+  <Section title="17. Betroffenenrechte">
+    <p>Betroffene Personen haben insbesondere folgende Rechte:</p>
+    <ul class="list-disc space-y-2 pl-6">
+      <li>Auskunft (Art. 15 DSGVO)</li>
+      <li>Berichtigung (Art. 16 DSGVO)</li>
+      <li>Löschung (Art. 17 DSGVO)</li>
+      <li>Einschränkung (Art. 18 DSGVO)</li>
+      <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+      <li>Widerspruch gegen bestimmte Verarbeitungen (Art. 21 DSGVO)</li>
+      <li>Widerruf erteilter Einwilligungen mit Wirkung für die Zukunft</li>
+      <li>Beschwerde bei einer Datenschutzaufsichtsbehörde</li>
+    </ul>
+  </Section>
+
+  <Section title="18. Zuständige Aufsichtsbehörde">
+    <p>
+      Für den Sitz des Verantwortlichen ist regelmäßig das Bayerische Landesamt für Datenschutzaufsicht (BayLDA),
+      Promenade 18, 91522 Ansbach, Deutschland, zuständig. Sie können sich auch an jede andere zuständige
+      Datenschutzaufsichtsbehörde wenden.
+    </p>
+  </Section>
+
+  <Section title="19. Kontakt bei datenschutzrelevanten Anliegen">
+    <p>
+      Fragen zum Datenschutz:{" "}
+      <a class="font-semibold text-[#006b5b] underline-offset-4 hover:underline" href="/kontakt">
+        {legalContact.privacyEmail}
+      </a>
+      .
+    </p>
+  </Section>
+
+  <Section title="20. Änderungen dieser Erklärung">
+    <p>
+      Diese Erklärung wird aktualisiert, wenn sich technische Abläufe, Dienstleister, Rechtsgrundlagen oder
+      Verarbeitungszwecke ändern. Die jeweils aktuelle Fassung ist jederzeit auf dieser Seite abrufbar.
+    </p>
+  </Section>
+</LegalLayout>

@@ -1,0 +1,80 @@
+---
+import BrandLogo from "./BrandLogo.astro";
+import { Mail } from "@lucide/astro";
+
+const currentYear = new Date().getFullYear();
+
+const navItems = [
+  ["Funktionen", "/#funktionen"],
+  ["Ablauf", "/#ablauf"],
+  ["Sicherheit", "/#sicherheit"],
+  ["Preis", "/#preis"],
+  ["FAQ", "/#faq"],
+] as const;
+
+const contentLinks = [
+  ["Nebenkosten", "/funktionen/nebenkostenabrechnung"],
+  ["Dokumente", "/funktionen/dokumentenverwaltung-vermieter"],
+  ["Rauchmelder", "/funktionen/rauchmelder-verwaltung"],
+  ["Mieterkommunikation", "/funktionen/mieterkommunikation"],
+  ["Mieterportal", "/funktionen/mieterportal"],
+  ["Hinweise", "/funktionen/hinweise-fristen"],
+  ["Immobilien", "/funktionen/immobilienverwaltung"],
+  ["Ratgeber", "/ratgeber/nebenkostenabrechnung-private-vermieter"],
+] as const;
+---
+<footer class="border-t border-[#dfe9e6] bg-white">
+  <div class="mx-auto grid max-w-[1440px] gap-9 px-5 py-10 text-sm text-[#5c6b74] sm:px-8 md:grid-cols-[1.25fr_0.75fr_0.75fr_0.75fr] lg:px-12">
+    <div>
+      <a href="/" aria-label="Mietfolio Startseite">
+        <BrandLogo
+          iconClassName="h-9 w-9 border border-[rgba(10,102,87,0.15)] shadow-[0_8px_24px_rgba(3,36,32,0.08)] sm:h-10 sm:w-10"
+          textClassName="font-headline text-xl font-black text-brand-wordmark sm:text-2xl"
+        />
+      </a>
+      <p class="mt-5 max-w-sm leading-7">
+        Mietfolio bündelt die wichtigsten Vermieteraufgaben in einem klaren, objektbezogenen System.
+      </p>
+      <p class="mt-6 text-xs font-semibold text-[#7a8992]">© {currentYear} Mietfolio. Alle Rechte vorbehalten.</p>
+    </div>
+
+    <nav class="grid content-start gap-3 font-label font-semibold" aria-label="Produktlinks">
+      <h2 class="font-headline text-sm font-black uppercase tracking-[0.16em] text-[#0b1422]">Produkt</h2>
+      {navItems.map(([label, href]) => (
+        <a class="rounded-md transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href={href}>
+          {label}
+        </a>
+      ))}
+      {contentLinks.map(([label, href]) => (
+        <a class="rounded-md transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href={href}>
+          {label}
+        </a>
+      ))}
+      <a class="rounded-md transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="/auth">
+        Login
+      </a>
+    </nav>
+
+    <nav class="grid content-start gap-3 font-label font-semibold" aria-label="Rechtliches">
+      <h2 class="font-headline text-sm font-black uppercase tracking-[0.16em] text-[#0b1422]">Rechtliches</h2>
+      <a class="rounded-md transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="/impressum">
+        Impressum
+      </a>
+      <a class="rounded-md transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="/datenschutz">
+        Datenschutz
+      </a>
+      <a class="rounded-md transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="/agb">
+        AGB
+      </a>
+    </nav>
+
+    <div class="grid content-start gap-3">
+      <h2 class="font-headline text-sm font-black uppercase tracking-[0.16em] text-[#0b1422]">Kontakt</h2>
+      <a class="inline-flex items-center gap-2 rounded-md font-label font-semibold transition hover:text-[#006b5b] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="/kontakt">
+        <Mail class="h-4 w-4" stroke-width={2} />
+        kontakt@mietfolio.de
+      </a>
+      <p class="text-xs leading-6 text-[#7a8992]">Impressum- und Datenschutzhinweise sind auf den Rechtsseiten hinterlegt.</p>
+    </div>
+  </div>
+</footer>

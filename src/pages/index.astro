@@ -1,0 +1,814 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AppIcon from '../components/AppIcon.astro';
+import MaterialSymbol from '../components/MaterialSymbol.astro';
+
+import {
+  ArrowRight,
+  Bell,
+  Building2,
+  Check,
+  CheckCircle2,
+  ChevronRight,
+  Euro,
+  FileText,
+  FolderOpen,
+  Home,
+  LockKeyhole,
+  Mail,
+  ReceiptText,
+  Server,
+  ShieldCheck,
+  UsersRound,
+  Radio,
+} from "@lucide/astro";
+
+const navItems = [
+  ["Funktionen", "#funktionen"],
+  ["Ablauf", "#ablauf"],
+  ["Sicherheit", "#sicherheit"],
+  ["Preis", "#preis"],
+  ["FAQ", "#faq"],
+] as const;
+
+const proofItems = [
+  {
+    icon: ShieldCheck,
+    title: "DSGVO-bewusst",
+    text: "Daten bleiben sauber getrennt und nachvollziehbar.",
+  },
+  {
+    icon: LockKeyhole,
+    title: "Sicherer Zugriff",
+    text: "Supabase Auth und Row Level Security als technische Basis.",
+  },
+  {
+    icon: FileText,
+    title: "Export & Nachweis",
+    text: "Entwurfs- und Final-PDFs, Protokolle, ZIPs und Datenexporte.",
+  },
+  {
+    icon: CheckCircle2,
+    title: "Für Vermieter gemacht",
+    text: "Vom ersten Objekt bis zu geprüften Importen und Mieterfreigaben.",
+  },
+] as const;
+
+const workflowSteps = [
+  {
+    number: "01",
+    title: "Objekt anlegen",
+    text: "Immobilie, Eigentümerdaten und erste Stammdaten einmalig erfassen.",
+  },
+  {
+    number: "02",
+    title: "Unterlagen bündeln",
+    text: "Dokumente, Mieterzugänge, Rauchmelder, Nachrichten und Notizen strukturiert sammeln.",
+  },
+  {
+    number: "03",
+    title: "Prüfen und exportieren",
+    text: "Importe bestätigen, Fristen klären, Mieterbeiträge prüfen und Exporte erstellen.",
+  },
+] as const;
+
+const modules = [
+  {
+    icon: ReceiptText,
+    title: "Nebenkosten",
+    text: "Abrechnungsjahre, Kostenpositionen, Zählerstände, Verteilerschlüssel und CO2-Anteile mit Prüfstatus.",
+    href: "/funktionen/nebenkostenabrechnung",
+    points: ["KI-Import mit Review", "Entwurfs- und Final-PDF", "Jahresvergleich"],
+  },
+  {
+    icon: FolderOpen,
+    title: "Dokumente",
+    text: "Verträge, Rechnungen und Belege mit Kategorien, Vorschau, Duplikat-Hinweis und Sammelaktionen.",
+    href: "/funktionen/dokumentenverwaltung-vermieter",
+    points: ["KI-Sortierhilfe", "Mieterfreigaben", "ZIP-Export"],
+  },
+  {
+    icon: UsersRound,
+    title: "Mieter & Portal",
+    text: "Stammdaten, Mietzeiträume, Zahlungsdaten, Einladungen und geprüfte Profiländerungen.",
+    href: "/funktionen/mieterportal",
+    points: ["Zugänge einladen", "Uploads prüfen", "Self-Service steuern"],
+  },
+  {
+    icon: Mail,
+    title: "Nachrichten",
+    text: "Anrufe, E-Mails, interne Notizen und echte Mieterportal-Konversationen bleiben nachvollziehbar.",
+    href: "/funktionen/mieterkommunikation",
+    points: ["Mieterbezug", "Portal-Antworten", "Such- und Filterliste"],
+  },
+  {
+    icon: Bell,
+    title: "Hinweise",
+    text: "Manuelle Erinnerungen plus automatisch abgeleitete Mietenden und Rauchmeldertermine.",
+    href: "/funktionen/hinweise-fristen",
+    points: ["Prioritäten", "Fälligkeiten", "Quellenlinks"],
+  },
+  {
+    icon: Radio,
+    title: "Rauchmelder",
+    text: "Inventar, Bilder, Wartungslogs, Prüfeingang für Mieter-Wartungen und PDF-Protokolle.",
+    href: "/funktionen/rauchmelder-verwaltung",
+    points: ["Bildzuordnung", "KI-Dokumentimport", "Prüfprotokolle"],
+  },
+  {
+    icon: Building2,
+    title: "Immobilien",
+    text: "Mehrere Objekte mit aktivem Kontext, Stammdaten, Wohnfläche, Bundesland und internen Notizen.",
+    href: "/funktionen/immobilienverwaltung",
+    points: ["Objektwechsel", "Eigentümerdaten", "Datenexport"],
+  },
+] as const;
+
+const securityItems = [
+  "Property-Scoping: alle Daten sind klar dem Objekt zugeordnet",
+  "Row Level Security: Nutzergrenzen bleiben auf Datenbankebene geschützt",
+  "Transparente Exporte: PDFs, Protokolle und ZIPs für die eigene Ablage",
+  "Keine Blackbox: nachvollziehbare Strukturen statt versteckter Prozesse",
+] as const;
+
+const pricingPoints = [
+  "Frühen Zugang vormerken, ohne direkt ein Konto anzulegen",
+  "Benachrichtigung, sobald die Registrierung wieder öffnet",
+  "Bestehende Nutzer können sich weiterhin normal einloggen",
+  "Kostenpflichtige Pläne werden vor Abschluss klar ausgewiesen",
+] as const;
+
+const faqItems = [
+  {
+    question: "Was kostet Mietfolio?",
+    answer:
+      "Der Start ist kostenlos. Falls kostenpflichtige Pläne aktiviert werden, werden Preis, Leistungsumfang und Laufzeit vor der Buchung transparent angezeigt.",
+  },
+  {
+    question: "Für wen ist Mietfolio gedacht?",
+    answer:
+      "Für private Vermieter und kleine Verwaltungen, die Nebenkosten, Dokumente, Mieterkommunikation, Rauchmelder und Erinnerungen an einem Ort organisieren möchten.",
+  },
+  {
+    question: "Kann ich mehrere Immobilien verwalten?",
+    answer:
+      "Ja. Mietfolio arbeitet mit einem aktiven Objektkontext, sodass Daten und Aufgaben sauber je Immobilie getrennt bleiben.",
+  },
+  {
+    question: "Was kann der Mieterbereich?",
+    answer:
+      "Vermieter können Mieterzugänge einladen, Dokumente gezielt freigeben, Uploads prüfen, Portal-Nachrichten beantworten und Rauchmelderwartungen als Self-Service freischalten.",
+  },
+  {
+    question: "Wo werden die Daten gespeichert?",
+    answer:
+      "Mietfolio nutzt Supabase für Authentifizierung, Datenbank und Speicher (inkl. Edge Functions/Storage). Die Datenschutzerklärung enthält die vollständigen vertraglichen und Datenschutzangaben zu Auftragsverarbeitern und Regionen.",
+  },
+  {
+    question: "Gibt es Exporte?",
+    answer:
+      "Ja. Die App unterstützt unter anderem PDF-Ausgaben für Abrechnungen und Protokolle sowie ZIP-Exporte für Dokumente.",
+  },
+  {
+    question: "Ersetzt Mietfolio Rechts- oder Steuerberatung?",
+    answer:
+      "Nein. Mietfolio hilft bei Struktur, Dokumentation und Vorbereitung, ersetzt aber keine individuelle rechtliche oder steuerliche Beratung.",
+  },
+] as const;
+
+const previewSidebarLinks = [
+  ["dashboard", "Übersicht", true],
+  ["receipt_long", "Nebenkosten", false],
+  ["domain", "Immobilien", false],
+  ["groups", "Mieter", false],
+  ["forum", "Nachrichten", false],
+  ["notifications", "Hinweise", false],
+  ["description", "Dokumente", false],
+  ["build", "Rauchmelder", false],
+] as const;
+
+const previewCostItems = [
+  ["Grundsteuer", "1.240,50 €", "Umlagefähig", "account_balance"],
+  ["Gebäudeversicherung", "892,30 €", "Umlagefähig", "shield"],
+  ["Wasser / Abwasser", "684,10 €", "Zählerwerte gepflegt", "water_drop"],
+  ["Wartung Heizung", "420,00 €", "§35a EStG", "heat_pump"],
+] as const;
+
+const mobilePreviewTabs = [
+  ["dashboard", "Übersicht", true],
+  ["groups", "Mieter", false],
+  ["description", "Dok.", false],
+  ["build", "Wartung", false],
+  ["notifications", "Hinweise", false],
+] as const;
+
+const billingYear = new Date().getFullYear();
+
+function getDemoBaseDate() {
+  const date = new Date();
+  date.setHours(12, 0, 0, 0);
+  return date;
+}
+
+function getDateOffset(offsetDays: number) {
+  const date = getDemoBaseDate();
+  date.setDate(date.getDate() + offsetDays);
+  return date;
+}
+
+function formatDemoDate(offsetDays: number) {
+  return new Intl.DateTimeFormat("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  }).format(getDateOffset(offsetDays));
+}
+
+function formatDemoShortDate(offsetDays: number) {
+  return new Intl.DateTimeFormat("de-DE", {
+    day: "2-digit",
+    month: "2-digit",
+  }).format(getDateOffset(offsetDays));
+}
+
+function getDueLabel(offsetDays: number) {
+  if (offsetDays === 0) return "Heute";
+  if (offsetDays === 1) return "Fällig morgen";
+  return offsetDays > 1 ? `Fällig in ${offsetDays} Tagen` : `Überfällig seit ${Math.abs(offsetDays)} Tagen`;
+}
+
+const operationRows = [
+  [formatDemoDate(3), "Rauchmelderprüfung", "Wohnung 2.OG rechts", getDueLabel(3), "bg-[#ff5a42]"],
+  [formatDemoDate(11), "Heizungswartung", "Musterstraße 12", getDueLabel(11), "bg-[#f0a83a]"],
+  [formatDemoDate(17), `Nebenkostenabrechnung ${billingYear}`, "Musterstraße 12", getDueLabel(17), "bg-[#ffcf5a]"],
+  [formatDemoDate(22), "Mietvertrag endet", "Wohnung 1.OG links", `In ${22} Tagen`, "bg-[#4ea8ff]"],
+] as const;
+
+const previewReminders = [
+  ["Rauchmelder prüfen", formatDemoDate(2)],
+  ["Nebenkosten finalisieren", formatDemoDate(17)],
+  ["Mietende prüfen", formatDemoDate(22)],
+] as const;
+
+const mobilePreviewTasks = [
+  [`Nebenkosten ${billingYear}`, formatDemoShortDate(17), "receipt_long"],
+  ["Rauchmelder prüfen", formatDemoShortDate(2), "build"],
+] as const;
+
+const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`, "Terminvereinbarung"] as const;
+---
+<Layout
+  title="Mietfolio | Vermietung, Nebenkosten und Dokumente in einem System"
+  description="Mietfolio bündelt Nebenkosten, Dokumente, Mieter, Nachrichten, Rauchmelder und Fristen für private Vermieter in einer übersichtlichen SaaS-App."
+  canonicalPath="/"
+>
+  <Header />
+  
+  <div class="min-h-screen bg-white font-body text-[#0b1422] antialiased selection:bg-[#bff3e5] selection:text-[#06231f]">
+    <main id="top">
+      <section class="relative flex overflow-hidden border-b border-[#dfe9e6] bg-[linear-gradient(120deg,#ffffff_0%,#ffffff_54%,#f3fbf8_100%)] pt-16 xl:min-h-[76svh]">
+        <div class="mx-auto grid w-full max-w-[1440px] items-center gap-8 px-5 py-8 max-[359px]:gap-6 max-[359px]:py-6 sm:px-8 sm:py-10 lg:py-12 xl:grid-cols-[0.82fr_1.18fr] xl:gap-10 xl:px-12 xl:py-14">
+          <div class="relative z-10 w-full max-w-[690px]">
+            <h1 class="max-w-[650px] font-headline text-4xl font-black leading-[1.03] text-[#0b1422] max-[359px]:text-[2.1rem] sm:text-5xl lg:text-6xl xl:text-7xl">
+              Vermietung steuern, bevor sie Arbeit wird
+            </h1>
+            <p class="mt-6 max-w-xl text-lg leading-8 text-[#2d3d49] max-[359px]:mt-5 max-[359px]:text-base max-[359px]:leading-7 sm:text-xl">
+              Nebenkosten, Dokumente, Mieterportal, Rauchmelder, Nachrichten und Fristen laufen in einem System zusammen.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 max-[359px]:mt-7 sm:flex-row">
+              <a class="inline-flex h-12 items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_18px_34px_rgba(0,107,91,0.26)] transition hover:-translate-y-0.5 hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4 focus-visible:ring-offset-4" href="/warteliste">
+                Zur Warteliste
+                <ArrowRight class="ml-2 h-4 w-4" />
+              </a>
+              <a class="inline-flex h-12 items-center justify-center rounded-md border border-[rgba(0,107,91,0.45)] bg-white/[0.92] px-6 font-label text-base font-bold text-[#006b5b] shadow-[0_14px_30px_rgba(14,36,43,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="#funktionen">
+                Funktionen ansehen
+              </a>
+            </div>
+          </div>
+          <div class="relative z-10 min-w-0">
+            <!-- Desktop Product Preview -->
+            <div class="relative mx-auto hidden h-[500px] w-full max-w-[780px] overflow-hidden rounded-lg border border-[#dbe3e6] bg-[#faf8ff] text-left shadow-[0_34px_90px_rgba(14,36,43,0.16)] xl:block">
+              <div class="flex h-12 items-center justify-between border-b border-slate-200/60 bg-white/[0.88] px-4 backdrop-blur">
+                <div class="flex items-center gap-5">
+                  <div class="flex items-center gap-2.5">
+                    <AppIcon className="h-8 w-8 shadow-sm" />
+                    <span class="font-headline text-lg font-black tracking-tight text-brand-wordmark">Mietfolio</span>
+                  </div>
+                  <div class="hidden items-center gap-4 font-headline text-xs font-bold text-slate-500 lg:flex">
+                    {["Übersicht", "Immobilien", "Mieter", "Dokumente", "Nachrichten"].map((item, index) => (
+                      <span class={index === 0 ? "text-[#278574]" : ""}>
+                        {item}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="hidden rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 sm:inline-flex">
+                    Musterstraße 12
+                  </span>
+                  <MaterialSymbol icon="settings" className="text-lg text-slate-500" />
+                  <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#d0e7e1] text-xs font-black text-[#174f45]">S</span>
+                </div>
+              </div>
+
+              <div class="grid h-[calc(100%-3rem)] grid-cols-[70px_1fr] md:grid-cols-[184px_1fr]">
+                <aside class="border-r border-slate-200/70 bg-[#f2f3ff] px-2 py-4 md:px-3">
+                  <div class="mb-5 hidden items-center gap-3 px-2 md:flex">
+                    <span aria-hidden="true" class="inline-flex shrink-0 items-center justify-center rounded-xl bg-[#278574] text-white shadow-sm h-9 w-9">
+                      <MaterialSymbol icon="home_work" fill className="text-[1.55rem]" />
+                    </span>
+                    <div class="min-w-0">
+                      <p class="truncate font-headline text-xs font-bold text-[#278574]">Musterstraße 12</p>
+                      <p class="truncate text-[10px] uppercase tracking-widest text-slate-500">Aktive Immobilie</p>
+                    </div>
+                  </div>
+                  <div class="space-y-1">
+                    {previewSidebarLinks.map(([icon, label, active]) => (
+                      <div
+                        class:list={["flex items-center justify-center rounded-lg py-2.5 text-sm transition md:justify-start md:px-3", 
+                          active ? "bg-white text-[#278574] shadow-sm" : "text-slate-600"
+                        ]}
+                      >
+                        <MaterialSymbol icon={icon} fill={active} className="text-xl md:mr-3" />
+                        <span class="hidden text-xs font-medium md:inline">{label}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div class="mt-5 hidden rounded-xl bg-[#278574] px-3 py-2.5 text-center font-headline text-xs font-bold text-white md:block">
+                    Neue Position
+                  </div>
+                </aside>
+
+                <div class="overflow-hidden bg-[#faf8ff] p-4 md:p-5">
+                  <div class="mb-5 flex items-start justify-between gap-4">
+                    <div>
+                      <p class="font-label text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Übersicht</p>
+                      <h2 class="mt-1 font-headline text-lg font-black leading-tight text-[#131b2e] md:text-2xl">
+                        Nebenkostenabrechnung
+                      </h2>
+                    </div>
+                    <div class="hidden items-center gap-2 md:flex">
+                      <span class="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">{billingYear}</span>
+                      <span class="rounded-xl bg-[#278574] px-3 py-2 text-xs font-bold text-white">PDF-Export</span>
+                    </div>
+                  </div>
+
+                  <div class="grid grid-cols-3 gap-3">
+                    {[
+                      ["Gesamtkosten", "3.236,90 €", "receipt_long"],
+                      ["Vorauszahlung", "2.980,00 €", "payments"],
+                      ["Differenz", "256,90 €", "monitoring"],
+                    ].map(([label, value, icon]) => (
+                      <div class="rounded-2xl bg-white p-4 shadow-sm">
+                        <div class="flex items-center justify-between">
+                          <span class="text-xs font-semibold text-slate-500">{label}</span>
+                          <MaterialSymbol icon={icon} className="text-lg text-[#278574]" />
+                        </div>
+                        <p class="mt-3 font-headline text-xl font-black text-[#131b2e]">{value}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div class="mt-4 grid gap-4 lg:grid-cols-[1fr_220px]">
+                    <div class="rounded-2xl bg-white p-4 shadow-sm">
+                      <div class="mb-3 flex items-center justify-between">
+                        <h3 class="font-headline text-sm font-black text-[#131b2e]">Kostenpositionen</h3>
+                        <span class="text-xs font-bold text-[#278574]">KI-Import</span>
+                      </div>
+                      <div class="space-y-2">
+                        {previewCostItems.map(([title, amount, note, icon]) => (
+                          <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl border border-slate-100 px-3 py-2">
+                            <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-[#278574]">
+                              <MaterialSymbol icon={icon} className="text-lg" />
+                            </span>
+                            <div class="min-w-0">
+                              <p class="truncate text-sm font-bold text-[#131b2e]">{title}</p>
+                              <p class="truncate text-xs text-slate-500">{note}</p>
+                            </div>
+                            <span class="font-label text-sm font-black text-[#131b2e]">{amount}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div class="space-y-4">
+                      <div class="rounded-2xl bg-white p-4 shadow-sm">
+                        <h3 class="font-headline text-sm font-black text-[#131b2e]">Hinweise</h3>
+                        <div class="mt-3 space-y-3">
+                          {previewReminders.map(([title, date]) => (
+                            <div class="flex gap-3">
+                              <span class="mt-0.5 h-2.5 w-2.5 rounded-full bg-[#278574]" />
+                              <div>
+                                <p class="text-xs font-bold text-[#131b2e]">{title}</p>
+                                <p class="text-[11px] text-slate-500">{date}</p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div class="mt-4 flex items-center justify-between rounded-xl bg-[#f8fafb] px-3 py-2">
+                          <span class="text-xs font-bold text-slate-500">Mieter</span>
+                          <span class="font-headline text-sm font-black text-[#278574]">4 aktiv</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Mobile Product Preview -->
+            <div class="relative mx-auto h-[232px] w-full max-w-[560px] overflow-hidden rounded-[18px] border border-[#dbe3e6] bg-[#faf8ff] text-left shadow-[0_24px_64px_rgba(14,36,43,0.14)] min-[360px]:h-[250px] md:h-[360px] xl:hidden">
+              <div class="flex h-12 items-center justify-between border-b border-slate-200/70 bg-white/92 px-4">
+                <div>
+                  <p class="font-headline text-base font-black tracking-tight text-[#278574]">Übersicht</p>
+                  <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Musterstraße 12</p>
+                </div>
+                <div class="flex items-center gap-2.5">
+                  <span class="rounded-full bg-[#edf8f4] px-2.5 py-1 font-label text-[11px] font-black text-[#278574]">{billingYear}</span>
+                  <MaterialSymbol icon="more_vert" className="text-xl text-slate-500" />
+                </div>
+              </div>
+
+              <div class="px-4 pb-16 pt-3">
+                <div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0">
+                    <p class="font-label text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Nebenkosten</p>
+                    <h2 class="mt-1 truncate font-headline text-lg font-black leading-tight text-[#131b2e]">
+                      Abrechnung prüfen
+                    </h2>
+                  </div>
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#278574] text-white shadow-sm">
+                    <MaterialSymbol icon="receipt_long" fill className="text-xl" />
+                  </span>
+                </div>
+
+                <div class="mt-3 grid grid-cols-2 gap-2.5">
+                  <div class="rounded-2xl bg-white p-3 shadow-sm">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="text-[11px] font-semibold text-slate-500">Gesamt</span>
+                      <MaterialSymbol icon="account_balance_wallet" className="text-base text-[#278574]" />
+                    </div>
+                    <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3.236,90 €</p>
+                  </div>
+                  <div class="rounded-2xl bg-white p-3 shadow-sm">
+                    <div class="flex items-center justify-between gap-2">
+                      <span class="text-[11px] font-semibold text-slate-500">Hinweise</span>
+                      <MaterialSymbol icon="notifications" className="text-base text-[#278574]" />
+                    </div>
+                    <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3 offen</p>
+                  </div>
+                </div>
+
+                <div class="mt-3 hidden rounded-2xl bg-white p-3 shadow-sm md:block">
+                  <div class="mb-2 flex items-center justify-between">
+                    <h3 class="font-headline text-sm font-black text-[#131b2e]">Heute wichtig</h3>
+                    <MaterialSymbol icon="arrow_forward" className="text-base text-[#278574]" />
+                  </div>
+                  <div class="space-y-2">
+                    {mobilePreviewTasks.map(([title, date, icon]) => (
+                      <div class="grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-xl bg-[#f8fafb] px-2.5 py-2">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-[#278574]">
+                          <MaterialSymbol icon={icon} className="text-base" />
+                        </span>
+                        <span class="truncate text-xs font-bold text-[#131b2e]">{title}</span>
+                        <span class="font-label text-[11px] font-bold text-slate-500">{date}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div class="absolute inset-x-0 bottom-0 grid grid-cols-5 border-t border-slate-200/70 bg-white/95 px-2 pb-2 pt-2 backdrop-blur">
+                {mobilePreviewTabs.map(([icon, label, active]) => (
+                  <span class:list={["flex min-w-0 flex-col items-center gap-0.5 rounded-xl py-1", active ? "text-[#278574]" : "text-slate-500"]}>
+                    <MaterialSymbol icon={icon} fill={active} className="text-xl" />
+                    <span class="max-w-full truncate font-label text-[9px] font-bold">{label}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="border-y border-[#dfe9e6] bg-white" aria-label="Produktvorteile">
+        <div class="mx-auto grid max-w-[1440px] px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
+          {proofItems.map(({ icon: Icon, title, text }, index) => (
+            <div
+              class:list={[`flex min-h-28 gap-4 border-b border-[#dfe9e6] px-5 py-7 sm:px-6 lg:px-8`, 
+                index % 2 === 0 ? "md:border-r" : "", 
+                index >= 2 ? "md:border-b-0" : "", 
+                "lg:border-b-0 lg:border-r", 
+                index === proofItems.length - 1 ? "lg:border-r-0" : ""
+              ]}
+            >
+              <span class="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-[#d9ebe6] bg-[#f4fbf8] text-[#006b5b]">
+                <Icon class="h-5 w-5" strokeWidth={2} />
+              </span>
+              <div>
+                <h2 class="font-headline text-base font-extrabold text-[#0b1422]">{title}</h2>
+                <p class="mt-1.5 text-sm leading-6 text-[#5c6b74]">{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="ablauf" class="scroll-mt-20 border-b border-[#dfe9e6] bg-white">
+        <div class="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.2fr_1fr_1fr_1fr_auto] lg:items-start lg:px-12">
+          <div class="lg:pr-4">
+            <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
+              In drei Schritten alles im Griff
+            </h2>
+            <p class="mt-4 text-base leading-7 text-[#5c6b74]">
+              Ein klarer Ablauf für weniger Hin und Her und mehr Zeit für das Wesentliche.
+            </p>
+            <a
+              class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4"
+              href="#funktionen"
+            >
+              So funktioniert's
+              <ArrowRight class="ml-2 h-4 w-4" />
+            </a>
+          </div>
+
+          <div class="grid gap-8 md:grid-cols-3 md:gap-6 lg:col-span-3 lg:gap-6">
+            {workflowSteps.map((step, index) => (
+              <article
+                class="relative flex h-full flex-col"
+              >
+                <div class="relative">
+                  {index < workflowSteps.length - 1 ? (
+                    <span
+                      class="pointer-events-none absolute left-6 top-6 hidden h-px w-[calc(100%+1.5rem)] bg-[rgba(0,107,91,0.45)] lg:block"
+                      aria-hidden="true"
+                    />
+                  ) : null}
+                  <div class="relative flex h-12 w-12 items-center justify-center rounded-full border border-[#006b5b] bg-white font-label text-sm font-black text-[#006b5b]">
+                    {step.number}
+                  </div>
+                </div>
+                <h3 class="mt-6 font-headline text-lg font-extrabold text-[#0b1422]">{step.title}</h3>
+                <p class="mt-3 flex-1 text-sm leading-6 text-[#5c6b74]">{step.text}</p>
+              </article>
+            ))}
+          </div>
+
+          <div class="hidden items-center justify-end self-center lg:flex">
+            <div class="relative flex items-center justify-center h-28 w-28 rounded-2xl border border-[#d9ebe6] bg-[#f4fbf8]/50 shadow-[0_8px_24px_rgba(14,36,43,0.04)] overflow-hidden">
+              <div class="absolute -bottom-6 -left-6 h-20 w-20 rounded-full bg-[#e6f5f0]/85" />
+              <div class="absolute -top-6 -right-6 h-16 w-16 rounded-full bg-[#e6f5f0]/50" />
+              
+              <div class="relative h-16 w-16 text-[#006b5b]">
+                <Building2 class="absolute bottom-0 left-0 h-14 w-14" strokeWidth={1.25} />
+                <div class="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-lg border border-[#d9ebe6] bg-white text-[#006b5b] shadow-sm">
+                  <Home class="h-5 w-5 text-[#4ea896]" strokeWidth={1.6} />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="funktionen" class="scroll-mt-20 border-b border-[#dfe9e6] bg-[#fbfdfc]">
+        <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12">
+          <div class="grid gap-8 lg:grid-cols-[260px_1fr]">
+            <div>
+              <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
+                Alle wichtigen Bereiche. Ein System.
+              </h2>
+              <p class="mt-4 text-base leading-7 text-[#5c6b74]">
+                Mietfolio verbindet die zentralen Vermieteraufgaben in einem gemeinsamen Objektkontext.
+              </p>
+              <a class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="#app-ueberblick">
+                App-Übersicht ansehen
+                <ArrowRight class="ml-2 h-4 w-4" />
+              </a>
+            </div>
+
+            <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+              {modules.map(({ icon: Icon, title, text, href, points }) => (
+                <article class="group flex min-h-72 flex-col rounded-lg border border-[#dfe9e6] bg-white p-5 shadow-[0_10px_28px_rgba(14,36,43,0.05)] transition duration-200 hover:-translate-y-1 hover:border-[#b9d3cc] hover:shadow-[0_18px_42px_rgba(14,36,43,0.09)]">
+                  <Icon class="h-8 w-8 text-[#006b5b]" strokeWidth={1.8} />
+                  <h3 class="mt-7 font-headline text-lg font-extrabold text-[#0b1422]">{title}</h3>
+                  <p class="mt-3 text-sm leading-6 text-[#5c6b74]">{text}</p>
+                  <ul class="mt-4 grid gap-2">
+                    {points.map((point) => (
+                      <li class="flex gap-2 text-xs font-semibold leading-5 text-[#2d3d49]">
+                        <Check class="mt-0.5 h-4 w-4 shrink-0 text-[#006b5b]" strokeWidth={2.2} />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <a class="mt-auto inline-flex items-center rounded-md pt-5 font-label text-sm font-bold text-[#006b5b] transition group-hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href={href} aria-label={`${title} Details ansehen`}>
+                    Details ansehen
+                    <ChevronRight class="ml-1 h-4 w-4" />
+                  </a>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="app-ueberblick" class="scroll-mt-20 bg-[#003f3f] text-white">
+        <div class="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[250px_1fr_230px] lg:px-12">
+          <div>
+            <h2 class="font-headline text-3xl font-black leading-tight">
+              Aufgaben und Fristen, auf einen Blick
+            </h2>
+            <p class="mt-4 text-base leading-7 text-[#c9dfdc]">
+              Sehen, was bei Ihren Objekten ansteht: Abrechnung, Nachrichten, Wartung und Vertragsfristen.
+            </p>
+            <a class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#9de4cf] transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9de4cf]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="/auth">
+              App öffnen
+              <ArrowRight class="ml-2 h-4 w-4" />
+            </a>
+          </div>
+
+          <div class="overflow-hidden rounded-lg border border-white/[0.16] bg-white/[0.05] shadow-[0_26px_60px_rgba(0,0,0,0.22)]">
+            <div class="hidden grid-cols-[105px_1.2fr_1fr_120px] gap-4 border-b border-white/10 px-5 py-3 font-label text-xs font-bold uppercase text-[#9de4cf] md:grid">
+              <span>Datum</span>
+              <span>Vorgang</span>
+              <span>Objekt</span>
+              <span>Status</span>
+            </div>
+            <div>
+              {operationRows.map(([date, title, property, status, color]) => (
+                <div class="grid gap-2 border-b border-white/10 px-4 py-4 text-sm last:border-b-0 md:grid-cols-[105px_1.2fr_1fr_120px] md:items-center md:gap-4 md:px-5">
+                  <span class="font-label text-xs font-bold uppercase tracking-[0.16em] text-[#9de4cf] md:text-sm md:font-normal md:normal-case md:tracking-normal md:text-[#d9efea]">{date}</span>
+                  <span class="flex min-w-0 items-center gap-3 font-semibold">
+                    <span class={`h-2.5 w-2.5 shrink-0 rounded-full ${color}`} />
+                    <span class="truncate">{title}</span>
+                  </span>
+                  <span class="truncate text-[#c9dfdc]">{property}</span>
+                  <span class="w-fit rounded-md border border-[rgba(157,228,207,0.3)] bg-[rgba(157,228,207,0.12)] px-2.5 py-1 font-label text-xs font-bold text-[#9de4cf]">{status}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <aside class="rounded-lg border border-white/[0.16] bg-white/[0.06] p-5">
+            <div class="flex items-center justify-between">
+              <h3 class="font-headline text-lg font-extrabold">Offene Nachrichten</h3>
+              <span class="rounded-md bg-[rgba(157,228,207,0.15)] px-2 py-1 font-label text-xs font-bold text-[#9de4cf]">3</span>
+            </div>
+            <div class="mt-5 space-y-4">
+              {messageItems.map((item, index) => (
+                <div class="flex gap-3">
+                  <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#f3c47c] font-label text-xs font-black text-[#3d2604]">
+                    {index + 1}
+                  </span>
+                  <div>
+                    <p class="font-label text-sm font-bold">{item}</p>
+                    <p class="mt-0.5 text-xs text-[#c9dfdc]">{index === 0 ? "Heute" : index === 1 ? "Gestern" : "Vor 2 Tagen"}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <a class="mt-6 inline-flex items-center rounded-md font-label text-sm font-bold text-[#9de4cf] transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9de4cf]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="/auth">
+              Alle Nachrichten anzeigen
+              <ArrowRight class="ml-2 h-4 w-4" />
+            </a>
+          </aside>
+        </div>
+      </section>
+
+      <section id="sicherheit" class="scroll-mt-20 border-b border-[#dfe9e6] bg-white">
+        <div class="mx-auto grid max-w-[1440px] items-center gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[260px_1fr] lg:px-12">
+          <div class="flex items-center gap-5">
+            <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-[#dfe9e6] bg-white text-[#006b5b] shadow-[0_16px_36px_rgba(14,36,43,0.08)]">
+              <LockKeyhole class="h-7 w-7" strokeWidth={1.8} />
+            </span>
+            <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
+              Ihre Daten. Ihre Kontrolle.
+            </h2>
+          </div>
+          <div class="grid gap-5 md:grid-cols-4">
+            {securityItems.map((item) => (
+              <div class="flex gap-3 border-t border-[#dfe9e6] pt-5 md:border-l md:border-t-0 md:pl-5 md:pt-0">
+                <Check class="mt-0.5 h-5 w-5 shrink-0 text-[#006b5b]" strokeWidth={2.2} />
+                <p class="text-sm font-semibold leading-6 text-[#2d3d49]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="preis" class="scroll-mt-20 border-b border-[#dfe9e6] bg-[#fbfdfc]">
+        <div class="mx-auto grid max-w-[1440px] gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:px-12">
+          <div>
+            <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422] md:text-4xl">
+              Start in Kürze. Warteliste offen.
+            </h2>
+            <p class="mt-4 max-w-xl text-base leading-7 text-[#5c6b74]">
+              Die Registrierung ist aktuell pausiert. Tragen Sie sich ein und wir melden uns, sobald neue Zugänge zur App
+              freigeschaltet werden.
+            </p>
+            <a class="mt-6 inline-flex h-12 items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_18px_34px_rgba(0,107,91,0.22)] transition hover:-translate-y-0.5 hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4" href="/warteliste">
+              Auf die Warteliste
+              <ArrowRight class="ml-2 h-4 w-4" />
+            </a>
+          </div>
+
+          <div class="grid gap-4 md:grid-cols-[1fr_0.82fr]">
+            <article class="rounded-lg border border-[#dfe9e6] bg-white p-6 shadow-[0_18px_42px_rgba(14,36,43,0.07)]">
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <h3 class="font-headline text-xl font-black text-[#0b1422]">Start</h3>
+                  <p class="mt-1 text-sm leading-6 text-[#5c6b74]">Für die erste echte Prüfung im Alltag.</p>
+                </div>
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#e7f7f1] text-[#006b5b]">
+                  <Euro class="h-5 w-5" strokeWidth={2.2} />
+                </span>
+              </div>
+              <p class="mt-7 font-headline text-4xl font-black text-[#0b1422]">Kostenlos</p>
+              <p class="mt-2 text-sm font-semibold text-[#5c6b74]">Starten ohne automatische Zahlung.</p>
+              <ul class="mt-6 space-y-3">
+                {pricingPoints.map((item) => (
+                  <li class="flex gap-3 text-sm leading-6 text-[#2d3d49]">
+                    <Check class="mt-0.5 h-5 w-5 shrink-0 text-[#006b5b]" strokeWidth={2.2} />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+
+            <div class="grid gap-4">
+              <article class="rounded-lg border border-[#dfe9e6] bg-white p-5">
+                <Server class="h-7 w-7 text-[#006b5b]" strokeWidth={1.8} />
+                <h3 class="mt-5 font-headline text-lg font-extrabold text-[#0b1422]">Daten bewusst getrennt</h3>
+                <p class="mt-3 text-sm leading-6 text-[#5c6b74]">
+                  Objekt- und Nutzerdaten bleiben technisch im vorgesehenen App-Kontext.
+                </p>
+              </article>
+              <article class="rounded-lg border border-[#dfe9e6] bg-white p-5">
+                <FileText class="h-7 w-7 text-[#006b5b]" strokeWidth={1.8} />
+                <h3 class="mt-5 font-headline text-lg font-extrabold text-[#0b1422]">Kein Beratungsversprechen</h3>
+                <p class="mt-3 text-sm leading-6 text-[#5c6b74]">
+                  Mietfolio hilft beim Organisieren und Exportieren, ersetzt aber keine individuelle Rechts- oder
+                  Steuerberatung.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq" class="scroll-mt-20 border-b border-[#dfe9e6] bg-white">
+        <div class="mx-auto grid max-w-[1440px] gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[300px_1fr] lg:px-12">
+          <div>
+            <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
+              Häufige Fragen
+            </h2>
+            <p class="mt-4 text-base leading-7 text-[#5c6b74]">
+              Die wichtigsten Antworten vor dem ersten Login.
+            </p>
+            <a class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="/kontakt">
+              Frage stellen
+              <Mail class="ml-2 h-4 w-4" />
+            </a>
+          </div>
+
+          <div class="grid gap-3 md:grid-cols-2">
+            {faqItems.map((item) => (
+              <details class="group rounded-lg border border-[#dfe9e6] bg-[#fbfdfc] p-5 open:bg-white open:shadow-[0_16px_36px_rgba(14,36,43,0.06)]">
+                <summary class="flex cursor-pointer list-none items-start justify-between gap-4 font-headline text-base font-extrabold text-[#0b1422] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35">
+                  <span>{item.question}</span>
+                  <ChevronRight class="mt-0.5 h-4 w-4 shrink-0 text-[#006b5b] transition group-open:rotate-90" strokeWidth={2.2} />
+                </summary>
+                <p class="mt-4 text-sm leading-6 text-[#5c6b74]">{item.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-[#003f3f] text-white">
+        <div class="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-16 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
+          <div>
+            <h2 class="font-headline text-3xl font-black leading-tight md:text-4xl">
+              Zugang vormerken und später starten.
+            </h2>
+            <p class="mt-3 max-w-2xl text-base leading-7 text-[#c9dfdc]">
+              Wir öffnen die Registrierung schrittweise. Die Warteliste ist der aktuelle Weg zu einem neuen Zugang.
+            </p>
+          </div>
+          <div class="flex flex-col gap-3 sm:flex-row">
+            <a class="inline-flex h-12 items-center justify-center rounded-md bg-white px-6 font-label text-base font-bold text-[#003f3f] transition hover:-translate-y-0.5 hover:bg-[#e9f6f2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="/warteliste">
+              Auf die Warteliste
+              <ArrowRight class="ml-2 h-4 w-4" />
+            </a>
+            <a class="inline-flex h-12 items-center justify-center rounded-md border border-white/[0.28] px-6 font-label text-base font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="#funktionen">
+              Funktionen ansehen
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <Footer />
+</Layout>

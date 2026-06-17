@@ -1,0 +1,16 @@
+---
+import AppIcon from "./AppIcon.astro";
+
+interface Props {
+  className?: string;
+  iconClassName?: string;
+  iconImageClassName?: string;
+  textClassName?: string;
+}
+
+const { className = "", iconClassName = "", iconImageClassName = "", textClassName = "" } = Astro.props;
+---
+<span class:list={["inline-flex items-center gap-2.5 sm:gap-3", className]}>
+  <AppIcon className={iconClassName} imageClassName={iconImageClassName} />
+  <span class:list={["text-brand-wordmark", textClassName]}>Mietfolio</span>
+</span>

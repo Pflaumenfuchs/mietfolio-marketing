@@ -1,0 +1,17 @@
+---
+interface Props {
+  alt?: string;
+  className?: string;
+  imageClassName?: string;
+}
+
+const { alt = "", className = "", imageClassName = "" } = Astro.props;
+---
+<span class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}>
+  <img
+    alt={alt}
+    class:list={["h-full w-full object-contain", imageClassName]}
+    draggable="false"
+    src="/logo.svg"
+  />
+</span>

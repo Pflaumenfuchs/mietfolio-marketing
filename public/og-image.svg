@@ -1,0 +1,33 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Mietfolio</title>
+  <desc id="desc">Vermietung, Nebenkosten und Dokumente in einem System.</desc>
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <rect x="0" y="0" width="1200" height="630" fill="url(#bg)"/>
+  <rect x="76" y="72" width="1048" height="486" rx="28" fill="#ffffff" stroke="#dfe9e6" stroke-width="2"/>
+  <rect x="128" y="126" width="84" height="84" rx="20" fill="#006b5b"/>
+  <path d="M154 167.5L170 154L186 167.5V190H158V174H182V190" stroke="#ffffff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="240" y="178" fill="#0b1422" font-family="Manrope, Inter, Arial, sans-serif" font-size="54" font-weight="800">Mietfolio</text>
+  <text x="128" y="315" fill="#0b1422" font-family="Manrope, Inter, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-1">
+    Vermietung steuern,
+  </text>
+  <text x="128" y="398" fill="#0b1422" font-family="Manrope, Inter, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-1">
+    bevor sie Arbeit wird
+  </text>
+  <text x="132" y="473" fill="#2d3d49" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="500">
+    Nebenkosten, Dokumente, Mieter, Rauchmelder und Fristen in einem System.
+  </text>
+  <rect x="820" y="124" width="246" height="310" rx="22" fill="#f4faf7" stroke="#cfe1dc"/>
+  <rect x="852" y="160" width="182" height="20" rx="10" fill="#006b5b"/>
+  <rect x="852" y="206" width="102" height="88" rx="16" fill="#ffffff" stroke="#dfe9e6"/>
+  <rect x="972" y="206" width="62" height="88" rx="16" fill="#ffffff" stroke="#dfe9e6"/>
+  <rect x="852" y="318" width="182" height="18" rx="9" fill="#89cdbc"/>
+  <rect x="852" y="356" width="142" height="18" rx="9" fill="#b7ddd2"/>
+  <rect x="852" y="394" width="96" height="18" rx="9" fill="#d7e8e3"/>
+  <defs>
+    <linearGradient id="bg" x1="1200" y1="0" x2="0" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#eef9f5"/>
+      <stop offset="0.55" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#ffffff"/>
+    </linearGradient>
+  </defs>
+</svg>

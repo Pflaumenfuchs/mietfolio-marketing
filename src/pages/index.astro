@@ -298,7 +298,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                   </div>
                   <div class="hidden items-center gap-4 font-headline text-xs font-bold text-slate-500 lg:flex">
                     {["Übersicht", "Immobilien", "Mieter", "Dokumente", "Nachrichten"].map((item, index) => (
-                      <span class={index === 0 ? "text-[#278574]" : ""}>
+                      <span class={index === 0 ? "text-[#1b6e60]" : ""}>
                         {item}
                       </span>
                     ))}
@@ -316,11 +316,11 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
               <div class="grid h-[calc(100%-3rem)] grid-cols-[70px_1fr] md:grid-cols-[184px_1fr]">
                 <aside class="border-r border-slate-200/70 bg-[#f2f3ff] px-2 py-4 md:px-3">
                   <div class="mb-5 hidden items-center gap-3 px-2 md:flex">
-                    <span aria-hidden="true" class="inline-flex shrink-0 items-center justify-center rounded-xl bg-[#278574] text-white shadow-sm h-9 w-9">
+                    <span aria-hidden="true" class="inline-flex shrink-0 items-center justify-center rounded-xl bg-[#1b6e60] text-white shadow-sm h-9 w-9">
                       <MaterialSymbol icon="home_work" fill className="text-[1.55rem]" />
                     </span>
                     <div class="min-w-0">
-                      <p class="truncate font-headline text-xs font-bold text-[#278574]">Musterstraße 12</p>
+                      <p class="truncate font-headline text-xs font-bold text-[#1b6e60]">Musterstraße 12</p>
                       <p class="truncate text-[10px] uppercase tracking-widest text-slate-500">Aktive Immobilie</p>
                     </div>
                   </div>
@@ -328,7 +328,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                     {previewSidebarLinks.map(([icon, label, active]) => (
                       <div
                         class:list={["flex items-center justify-center rounded-lg py-2.5 text-sm transition md:justify-start md:px-3", 
-                          active ? "bg-white text-[#278574] shadow-sm" : "text-slate-600"
+                          active ? "bg-white text-[#1b6e60] shadow-sm" : "text-slate-600"
                         ]}
                       >
                         <MaterialSymbol icon={icon} fill={active} className="text-xl md:mr-3" />
@@ -336,7 +336,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                       </div>
                     ))}
                   </div>
-                  <div class="mt-5 hidden rounded-xl bg-[#278574] px-3 py-2.5 text-center font-headline text-xs font-bold text-white md:block">
+                  <div class="mt-5 hidden rounded-xl bg-[#1b6e60] px-3 py-2.5 text-center font-headline text-xs font-bold text-white md:block">
                     Neue Position
                   </div>
                 </aside>
@@ -351,7 +351,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                     </div>
                     <div class="hidden items-center gap-2 md:flex">
                       <span class="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">{billingYear}</span>
-                      <span class="rounded-xl bg-[#278574] px-3 py-2 text-xs font-bold text-white">PDF-Export</span>
+                      <span class="rounded-xl bg-[#1b6e60] px-3 py-2 text-xs font-bold text-white">PDF-Export</span>
                     </div>
                   </div>
 
@@ -364,7 +364,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                       <div class="rounded-2xl bg-white p-4 shadow-sm">
                         <div class="flex items-center justify-between">
                           <span class="text-xs font-semibold text-slate-500">{label}</span>
-                          <MaterialSymbol icon={icon} className="text-lg text-[#278574]" />
+                          <MaterialSymbol icon={icon} className="text-lg text-[#1b6e60]" />
                         </div>
                         <p class="mt-3 font-headline text-xl font-black text-[#131b2e]">{value}</p>
                       </div>
@@ -375,12 +375,12 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                     <div class="rounded-2xl bg-white p-4 shadow-sm">
                       <div class="mb-3 flex items-center justify-between">
                         <h3 class="font-headline text-sm font-black text-[#131b2e]">Kostenpositionen</h3>
-                        <span class="text-xs font-bold text-[#278574]">KI-Import</span>
+                        <span class="text-xs font-bold text-[#1b6e60]">KI-Import</span>
                       </div>
                       <div class="space-y-2">
                         {previewCostItems.map(([title, amount, note, icon]) => (
                           <div class="grid grid-cols-[auto_1fr_auto] items-center gap-3 rounded-xl border border-slate-100 px-3 py-2">
-                            <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-[#278574]">
+                            <span class="flex h-8 w-8 items-center justify-center rounded-lg bg-emerald-50 text-[#1b6e60]">
                               <MaterialSymbol icon={icon} className="text-lg" />
                             </span>
                             <div class="min-w-0">
@@ -399,7 +399,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                         <div class="mt-3 space-y-3">
                           {previewReminders.map(([title, date]) => (
                             <div class="flex gap-3">
-                              <span class="mt-0.5 h-2.5 w-2.5 rounded-full bg-[#278574]" />
+                              <span class="mt-0.5 h-2.5 w-2.5 rounded-full bg-[#1b6e60]" />
                               <div>
                                 <p class="text-xs font-bold text-[#131b2e]">{title}</p>
                                 <p class="text-[11px] text-slate-500">{date}</p>
@@ -409,7 +409,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                         </div>
                         <div class="mt-4 flex items-center justify-between rounded-xl bg-[#f8fafb] px-3 py-2">
                           <span class="text-xs font-bold text-slate-500">Mieter</span>
-                          <span class="font-headline text-sm font-black text-[#278574]">4 aktiv</span>
+                          <span class="font-headline text-sm font-black text-[#1b6e60]">4 aktiv</span>
                         </div>
                       </div>
                     </div>
@@ -422,11 +422,11 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
             <div class="relative mx-auto h-[232px] w-full max-w-[560px] overflow-hidden rounded-[18px] border border-[#dbe3e6] bg-[#faf8ff] text-left shadow-[0_24px_64px_rgba(14,36,43,0.14)] min-[360px]:h-[250px] md:h-[360px] xl:hidden">
               <div class="flex h-12 items-center justify-between border-b border-slate-200/70 bg-white/92 px-4">
                 <div>
-                  <p class="font-headline text-base font-black tracking-tight text-[#278574]">Übersicht</p>
+                  <p class="font-headline text-base font-black tracking-tight text-[#1b6e60]">Übersicht</p>
                   <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Musterstraße 12</p>
                 </div>
                 <div class="flex items-center gap-2.5">
-                  <span class="rounded-full bg-[#edf8f4] px-2.5 py-1 font-label text-[11px] font-black text-[#278574]">{billingYear}</span>
+                  <span class="rounded-full bg-[#edf8f4] px-2.5 py-1 font-label text-[11px] font-black text-[#1b6e60]">{billingYear}</span>
                   <MaterialSymbol icon="more_vert" className="text-xl text-slate-500" />
                 </div>
               </div>
@@ -439,7 +439,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                       Abrechnung prüfen
                     </h2>
                   </div>
-                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#278574] text-white shadow-sm">
+                  <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#1b6e60] text-white shadow-sm">
                     <MaterialSymbol icon="receipt_long" fill className="text-xl" />
                   </span>
                 </div>
@@ -448,14 +448,14 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                   <div class="rounded-2xl bg-white p-3 shadow-sm">
                     <div class="flex items-center justify-between gap-2">
                       <span class="text-[11px] font-semibold text-slate-500">Gesamt</span>
-                      <MaterialSymbol icon="account_balance_wallet" className="text-base text-[#278574]" />
+                      <MaterialSymbol icon="account_balance_wallet" className="text-base text-[#1b6e60]" />
                     </div>
                     <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3.236,90 €</p>
                   </div>
                   <div class="rounded-2xl bg-white p-3 shadow-sm">
                     <div class="flex items-center justify-between gap-2">
                       <span class="text-[11px] font-semibold text-slate-500">Hinweise</span>
-                      <MaterialSymbol icon="notifications" className="text-base text-[#278574]" />
+                      <MaterialSymbol icon="notifications" className="text-base text-[#1b6e60]" />
                     </div>
                     <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3 offen</p>
                   </div>
@@ -464,12 +464,12 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                 <div class="mt-3 hidden rounded-2xl bg-white p-3 shadow-sm md:block">
                   <div class="mb-2 flex items-center justify-between">
                     <h3 class="font-headline text-sm font-black text-[#131b2e]">Heute wichtig</h3>
-                    <MaterialSymbol icon="arrow_forward" className="text-base text-[#278574]" />
+                    <MaterialSymbol icon="arrow_forward" className="text-base text-[#1b6e60]" />
                   </div>
                   <div class="space-y-2">
                     {mobilePreviewTasks.map(([title, date, icon]) => (
                       <div class="grid grid-cols-[auto_1fr_auto] items-center gap-2 rounded-xl bg-[#f8fafb] px-2.5 py-2">
-                        <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-[#278574]">
+                        <span class="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-50 text-[#1b6e60]">
                           <MaterialSymbol icon={icon} className="text-base" />
                         </span>
                         <span class="truncate text-xs font-bold text-[#131b2e]">{title}</span>
@@ -482,7 +482,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
 
               <div class="absolute inset-x-0 bottom-0 grid grid-cols-5 border-t border-slate-200/70 bg-white/95 px-2 pb-2 pt-2 backdrop-blur">
                 {mobilePreviewTabs.map(([icon, label, active]) => (
-                  <span class:list={["flex min-w-0 flex-col items-center gap-0.5 rounded-xl py-1", active ? "text-[#278574]" : "text-slate-500"]}>
+                  <span class:list={["flex min-w-0 flex-col items-center gap-0.5 rounded-xl py-1", active ? "text-[#1b6e60]" : "text-slate-500"]}>
                     <MaterialSymbol icon={icon} fill={active} className="text-xl" />
                     <span class="max-w-full truncate font-label text-[9px] font-bold">{label}</span>
                   </span>

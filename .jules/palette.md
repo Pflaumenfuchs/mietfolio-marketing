@@ -1,0 +1,3 @@
+## 2026-06-18 - Dynamically Injected Messages Need ARIA Live Regions
+**Learning:** The Astro forms in `kontakt.astro` and `warteliste.astro` use JavaScript to reveal hidden error/success DOM elements rather than full page reloads. Without `aria-live` regions, screen readers remained completely silent during these critical feedback events.
+**Action:** When dynamically toggling the visibility of feedback elements (success/error states), always apply `role="status"` with `aria-live="polite"` for non-critical confirmations, and `role="alert"` with `aria-live="assertive"` for critical error messages to ensure screen readers announce the state changes.

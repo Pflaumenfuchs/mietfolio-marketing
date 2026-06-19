@@ -228,9 +228,13 @@ const waitlistHighlights = [
     spinner.classList.remove('hidden');
 
     try {
-      // Get config vars or fallbacks
-      const supabaseUrl = (import.meta as any).env.PUBLIC_SUPABASE_URL || 'https://hnuooocdengtgfvgfnga.supabase.co';
-      const anonKey = (import.meta as any).env.PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_ZJel7zeoN_61hKMqE9nmCA_PnZCAh-m';
+      // Get config vars safely without fallbacks
+      const supabaseUrl = (import.meta as any).env.PUBLIC_SUPABASE_URL;
+      const anonKey = (import.meta as any).env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+      if (!supabaseUrl || !anonKey) {
+        throw new Error('Konfigurationsfehler: Bitte versuchen Sie es später noch einmal.');
+      }
 
       const response = await fetch(`${supabaseUrl}/functions/v1/join-waitlist`, {
         method: 'POST',

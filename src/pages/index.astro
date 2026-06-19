@@ -218,19 +218,26 @@ function getDateOffset(offsetDays: number) {
   return date;
 }
 
+// Optimization: Cache Intl.DateTimeFormat instances.
+// Instantiating new Intl objects is slow. Reusing them improves performance significantly when formatting multiple dates.
+const dateFormatter = new Intl.DateTimeFormat("de-DE", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+
 function formatDemoDate(offsetDays: number) {
-  return new Intl.DateTimeFormat("de-DE", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  }).format(getDateOffset(offsetDays));
+  return dateFormatter.format(getDateOffset(offsetDays));
 }
 
+// Optimization: Cache short date formatter.
+const shortDateFormatter = new Intl.DateTimeFormat("de-DE", {
+  day: "2-digit",
+  month: "2-digit",
+});
+
 function formatDemoShortDate(offsetDays: number) {
-  return new Intl.DateTimeFormat("de-DE", {
-    day: "2-digit",
-    month: "2-digit",
-  }).format(getDateOffset(offsetDays));
+  return shortDateFormatter.format(getDateOffset(offsetDays));
 }
 
 function getDueLabel(offsetDays: number) {

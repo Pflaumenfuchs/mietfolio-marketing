@@ -81,7 +81,7 @@ const waitlistHighlights = [
           </div>
 
           <div class="rounded-lg border border-[#dfe9e6] bg-white p-5 shadow-[0_28px_70px_rgba(14,36,43,0.12)] sm:p-8">
-            <div id="waitlist-success-container" class="hidden flex min-h-[420px] flex-col justify-center">
+            <div id="waitlist-success-container" class="hidden flex min-h-[420px] flex-col justify-center" role="status" aria-live="polite">
               <span class="flex h-14 w-14 items-center justify-center rounded-full bg-[#e7f7f1] text-[#006b5b]">
                 <CheckCircle2 class="h-7 w-7" stroke-width={2.1} />
               </span>
@@ -141,6 +141,7 @@ const waitlistHighlights = [
                     type="email"
                     required
                     autocomplete="email"
+                    aria-describedby="waitlist-error-message"
                     class="h-12 rounded-md border border-[#d7e3e0] bg-white px-4 text-base text-[#0b1422] outline-none transition placeholder:text-[#7a8992] focus:border-[#006b5b] focus:ring-4 focus:ring-[#006b5b]/10"
                     placeholder="name@beispiel.de"
                   />
@@ -163,14 +164,14 @@ const waitlistHighlights = [
                   </select>
                 </div>
 
-                <div id="waitlist-error-message" class="hidden rounded-md border border-[#ffd4ce] bg-[#fff4f1] px-4 py-3 text-sm font-semibold leading-6 text-[#9a2a1a]"></div>
+                <div id="waitlist-error-message" class="hidden rounded-md border border-[#ffd4ce] bg-[#fff4f1] px-4 py-3 text-sm font-semibold leading-6 text-[#9a2a1a]" role="alert" aria-live="assertive"></div>
 
                 <button
                   id="waitlist-submit-btn"
                   type="submit"
                   class="mt-1 inline-flex h-12 items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_18px_34px_rgba(0,107,91,0.22)] transition hover:-translate-y-0.5 hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
                 >
-                  <span id="btn-spinner" class="hidden mr-2 animate-spin">
+                  <span id="btn-spinner" class="hidden mr-2 animate-spin" aria-hidden="true">
                     <svg class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                       <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -190,19 +191,30 @@ const waitlistHighlights = [
 
 <script>
   const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const defaultWaitlistError = 'Die Warteliste ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal.';
   const form = document.getElementById('waitlist-form') as HTMLFormElement;
   const formContainer = document.getElementById('waitlist-form-container');
   const successContainer = document.getElementById('waitlist-success-container');
   const errorEl = document.getElementById('waitlist-error-message');
   const submitBtn = document.getElementById('waitlist-submit-btn') as HTMLButtonElement;
   const spinner = document.getElementById('btn-spinner');
+  const emailInput = document.getElementById('waitlist-email') as HTMLInputElement;
 
   form?.addEventListener('submit', async (event) => {
     event.preventDefault();
-    if (!errorEl || !submitBtn || !spinner) return;
+    if (!errorEl || !submitBtn || !spinner || !emailInput) return;
+
+    const showError = (message: string, markEmailInvalid = false) => {
+      errorEl.textContent = message;
+      errorEl.classList.remove('hidden');
+      if (markEmailInvalid) {
+        emailInput.setAttribute('aria-invalid', 'true');
+      }
+    };
 
     errorEl.classList.add('hidden');
     errorEl.textContent = '';
+    emailInput.removeAttribute('aria-invalid');
 
     const formData = new FormData(form);
     const name = formData.get('name') as string;
@@ -211,8 +223,7 @@ const waitlistHighlights = [
     const website = formData.get('website') as string;
 
     if (!emailPattern.test(email)) {
-      errorEl.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
-      errorEl.classList.remove('hidden');
+      showError('Bitte geben Sie eine gültige E-Mail-Adresse ein.', true);
       return;
     }
 
@@ -228,9 +239,12 @@ const waitlistHighlights = [
     spinner.classList.remove('hidden');
 
     try {
-      // Get config vars or fallbacks
-      const supabaseUrl = (import.meta as any).env.PUBLIC_SUPABASE_URL || 'https://hnuooocdengtgfvgfnga.supabase.co';
-      const anonKey = (import.meta as any).env.PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_ZJel7zeoN_61hKMqE9nmCA_PnZCAh-m';
+      const supabaseUrl = (import.meta as any).env.PUBLIC_SUPABASE_URL;
+      const anonKey = (import.meta as any).env.PUBLIC_SUPABASE_PUBLISHABLE_KEY;
+
+      if (!supabaseUrl || !anonKey) {
+        throw new Error(defaultWaitlistError);
+      }
 
       const response = await fetch(`${supabaseUrl}/functions/v1/join-waitlist`, {
         method: 'POST',
@@ -249,17 +263,22 @@ const waitlistHighlights = [
         })
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => ({ success: false, error: defaultWaitlistError }));
 
       if (!response.ok || !data.success) {
-        throw new Error(data.error || 'Die Warteliste ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal.');
+        if (response.status === 400) {
+          emailInput.setAttribute('aria-invalid', 'true');
+        }
+        throw new Error(data.error || defaultWaitlistError);
       }
 
       formContainer?.classList.add('hidden');
       successContainer?.classList.remove('hidden');
     } catch (err: any) {
-      errorEl.textContent = err.message || 'Die Warteliste ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal.';
-      errorEl.classList.remove('hidden');
+      const message = typeof err?.message === 'string' && !/fetch|network/i.test(err.message)
+        ? err.message
+        : defaultWaitlistError;
+      showError(message);
     } finally {
       submitBtn.disabled = false;
       spinner.classList.add('hidden');

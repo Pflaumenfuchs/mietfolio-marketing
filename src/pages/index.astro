@@ -218,19 +218,23 @@ function getDateOffset(offsetDays: number) {
   return date;
 }
 
+const demoDateFormatter = new Intl.DateTimeFormat("de-DE", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+});
+
+const demoShortDateFormatter = new Intl.DateTimeFormat("de-DE", {
+  day: "2-digit",
+  month: "2-digit",
+});
+
 function formatDemoDate(offsetDays: number) {
-  return new Intl.DateTimeFormat("de-DE", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  }).format(getDateOffset(offsetDays));
+  return demoDateFormatter.format(getDateOffset(offsetDays));
 }
 
 function formatDemoShortDate(offsetDays: number) {
-  return new Intl.DateTimeFormat("de-DE", {
-    day: "2-digit",
-    month: "2-digit",
-  }).format(getDateOffset(offsetDays));
+  return demoShortDateFormatter.format(getDateOffset(offsetDays));
 }
 
 function getDueLabel(offsetDays: number) {

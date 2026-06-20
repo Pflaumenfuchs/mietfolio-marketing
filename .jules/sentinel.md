@@ -1,0 +1,4 @@
+## 2024-05-24 - Hardcoded Supabase Credentials in Waitlist Page
+**Vulnerability:** Found hardcoded fallback values for Supabase URL and Publishable Key in `src/pages/warteliste.astro` (`https://hnuooocdengtgfvgfnga.supabase.co` and `sb_publishable_ZJel7zeoN_61hKMqE9nmCA_PnZCAh-m`).
+**Learning:** Even if it's an "anon" or "publishable" key, hardcoding these values directly into front-end code using `||` fallbacks poses a significant security risk, allowing anyone to find these keys in the repository and potentially interact with the backend service.
+**Prevention:** Always rely strictly on environment variables (e.g. `import.meta.env.PUBLIC_SUPABASE_URL`) without providing hardcoded fallback strings in the source code. Let the application fail securely (e.g., throw an error or handle gracefully) if the environment variable is missing.

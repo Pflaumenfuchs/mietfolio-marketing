@@ -5,19 +5,37 @@ interface Props {
   title?: string;
   description?: string;
   canonicalPath?: string;
+  lang?: "de" | "en";
+  ogLocale?: string;
+  ogLocaleAlternate?: string;
+  socialImagePath?: string;
+  socialImageAlt?: string;
+  alternateLinks?: Array<{
+    hreflang: string;
+    href: string;
+  }>;
 }
 
 const {
   title = "Mietfolio | Vermietung, Nebenkosten und Dokumente in einem System",
   description = "Mietfolio bündelt Nebenkosten, Dokumente, Mieter, Nachrichten, Rauchmelder und Fristen für private Vermieter in einer übersichtlichen SaaS-App.",
   canonicalPath = Astro.url.pathname,
+  lang = "de",
+  ogLocale = "de_DE",
+  ogLocaleAlternate,
+  socialImagePath = "/og-image.png",
+  socialImageAlt = "Mietfolio Social Preview mit Logo und Produktbotschaft",
+  alternateLinks = [],
 } = Astro.props;
 
 const siteUrl = "https://mietfolio.de";
 const canonicalUrl = `${siteUrl}${canonicalPath === "/" ? "" : canonicalPath}`.replace(/\/$/, "");
+const socialImageUrl = socialImagePath.startsWith("http")
+  ? socialImagePath
+  : `${siteUrl}${socialImagePath}`;
 ---
 <!doctype html>
-<html lang="de">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,6 +50,9 @@ const canonicalUrl = `${siteUrl}${canonicalPath === "/" ? "" : canonicalPath}`.r
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#006b5b" />
     <link rel="canonical" href={canonicalUrl} />
+    {alternateLinks.map(({ hreflang, href }) => (
+      <link rel="alternate" hreflang={hreflang} href={href} />
+    ))}
     
     <!-- Favicons -->
     <link rel="icon" sizes="any" href="/favicon.ico" />
@@ -46,8 +67,10 @@ const canonicalUrl = `${siteUrl}${canonicalPath === "/" ? "" : canonicalPath}`.r
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:site_name" content="Mietfolio" />
-    <meta property="og:locale" content="de_DE" />
-    <meta property="og:image" content={`${siteUrl}/og-image.png`} />
+    <meta property="og:locale" content={ogLocale} />
+    {ogLocaleAlternate ? <meta property="og:locale:alternate" content={ogLocaleAlternate} /> : null}
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:alt" content={socialImageAlt} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
 
@@ -55,7 +78,8 @@ const canonicalUrl = `${siteUrl}${canonicalPath === "/" ? "" : canonicalPath}`.r
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}/og-image.png`} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
 
     <!-- Simple Analytics -->
     <script defer src="/simple-analytics-loader.js"></script>

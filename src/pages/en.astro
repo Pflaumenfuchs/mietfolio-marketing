@@ -1,9 +1,9 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import AppIcon from '../components/AppIcon.astro';
-import MaterialSymbol from '../components/MaterialSymbol.astro';
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import AppIcon from "../components/AppIcon.astro";
+import MaterialSymbol from "../components/MaterialSymbol.astro";
 
 import {
   ArrowRight,
@@ -15,7 +15,6 @@ import {
   Euro,
   FileText,
   FolderOpen,
-  Home,
   LockKeyhole,
   Mail,
   ReceiptText,
@@ -25,183 +24,163 @@ import {
   Radio,
 } from "@lucide/astro";
 
-const navItems = [
-  ["Funktionen", "#funktionen"],
-  ["Ablauf", "#ablauf"],
-  ["Sicherheit", "#sicherheit"],
-  ["Preis", "#preis"],
-  ["FAQ", "#faq"],
-] as const;
-
 const proofItems = [
   {
     icon: ShieldCheck,
-    title: "DSGVO-bewusst",
-    text: "Daten bleiben sauber getrennt und nachvollziehbar.",
+    title: "Privacy-aware",
+    text: "Data stays separated by property and remains traceable.",
   },
   {
     icon: LockKeyhole,
-    title: "Sicherer Zugriff",
-    text: "Supabase Auth und Row Level Security als technische Basis.",
+    title: "Secure access",
+    text: "Supabase Auth and Row Level Security provide the technical basis.",
   },
   {
     icon: FileText,
-    title: "Export & Nachweis",
-    text: "Entwurfs- und Final-PDFs, Protokolle, ZIPs und Datenexporte.",
+    title: "Exports & proof",
+    text: "Draft and final PDFs, logs, ZIP files and data exports.",
   },
   {
     icon: CheckCircle2,
-    title: "Für Vermieter gemacht",
-    text: "Vom ersten Objekt bis zu geprüften Importen und Mieterfreigaben.",
+    title: "Built for landlords",
+    text: "From the first property to reviewed imports and tenant releases.",
   },
 ] as const;
 
 const workflowSteps = [
   {
     number: "01",
-    title: "Objekt anlegen",
-    text: "Immobilie, Eigentümerdaten und erste Stammdaten einmalig erfassen.",
+    title: "Create a property",
+    text: "Capture the property, owner details and core records once.",
   },
   {
     number: "02",
-    title: "Unterlagen bündeln",
-    text: "Dokumente, Mieterzugänge, Rauchmelder, Nachrichten und Notizen strukturiert sammeln.",
+    title: "Bundle documents",
+    text: "Keep documents, tenant access, smoke alarms, messages and notes structured.",
   },
   {
     number: "03",
-    title: "Prüfen und exportieren",
-    text: "Importe bestätigen, Fristen klären, Mieterbeiträge prüfen und Exporte erstellen.",
+    title: "Review and export",
+    text: "Confirm imports, clarify deadlines, review tenant input and create exports.",
   },
 ] as const;
 
 const modules = [
   {
     icon: ReceiptText,
-    title: "Nebenkosten",
-    text: "Abrechnungsjahre, Kostenpositionen, Zählerstände, Verteilerschlüssel und CO2-Anteile mit Prüfstatus.",
-    href: "/funktionen/nebenkostenabrechnung",
-    points: ["KI-Import mit Review", "Entwurfs- und Final-PDF", "Jahresvergleich"],
+    title: "Service charges",
+    text: "Billing years, cost items, meter readings, allocation keys and CO2 shares with review status.",
+    points: ["AI import with review", "Draft and final PDFs", "Year comparison"],
   },
   {
     icon: FolderOpen,
-    title: "Dokumente",
-    text: "Verträge, Rechnungen und Belege mit Kategorien, Vorschau, Duplikat-Hinweis und Sammelaktionen.",
-    href: "/funktionen/dokumentenverwaltung-vermieter",
-    points: ["KI-Sortierhilfe", "Mieterfreigaben", "ZIP-Export"],
+    title: "Documents",
+    text: "Contracts, invoices and receipts with categories, preview, duplicate hints and bulk actions.",
+    points: ["AI sorting support", "Tenant releases", "ZIP export"],
   },
   {
     icon: UsersRound,
-    title: "Mieter & Portal",
-    text: "Stammdaten, Mietzeiträume, Zahlungsdaten, Einladungen und geprüfte Profiländerungen.",
-    href: "/funktionen/mieterportal",
-    points: ["Zugänge einladen", "Uploads prüfen", "Self-Service steuern"],
+    title: "Tenants & portal",
+    text: "Master data, lease periods, payment details, invitations and reviewed profile changes.",
+    points: ["Invite access", "Review uploads", "Control self-service"],
   },
   {
     icon: Mail,
-    title: "Nachrichten",
-    text: "Anrufe, E-Mails, interne Notizen und echte Mieterportal-Konversationen bleiben nachvollziehbar.",
-    href: "/funktionen/mieterkommunikation",
-    points: ["Mieterbezug", "Portal-Antworten", "Such- und Filterliste"],
+    title: "Messages",
+    text: "Calls, emails, internal notes and real tenant-portal conversations remain traceable.",
+    points: ["Tenant context", "Portal replies", "Search and filters"],
   },
   {
     icon: Bell,
-    title: "Hinweise",
-    text: "Manuelle Erinnerungen plus automatisch abgeleitete Mietenden und Rauchmeldertermine.",
-    href: "/funktionen/hinweise-fristen",
-    points: ["Prioritäten", "Fälligkeiten", "Quellenlinks"],
+    title: "Reminders",
+    text: "Manual reminders plus automatically derived lease-end and smoke-alarm tasks.",
+    points: ["Priorities", "Due dates", "Source links"],
   },
   {
     icon: Radio,
-    title: "Rauchmelder",
-    text: "Inventar, Bilder, Wartungslogs, Prüfeingang für Mieter-Wartungen und PDF-Protokolle.",
-    href: "/funktionen/rauchmelder-verwaltung",
-    points: ["Bildzuordnung", "KI-Dokumentimport", "Prüfprotokolle"],
+    title: "Smoke alarms",
+    text: "Inventory, photos, maintenance logs, tenant maintenance reviews and PDF protocols.",
+    points: ["Photo assignment", "AI document import", "Inspection logs"],
   },
   {
     icon: Building2,
-    title: "Immobilien",
-    text: "Mehrere Objekte mit aktivem Kontext, Stammdaten, Wohnfläche, Bundesland und internen Notizen.",
-    href: "/funktionen/immobilienverwaltung",
-    points: ["Objektwechsel", "Eigentümerdaten", "Datenexport"],
+    title: "Properties",
+    text: "Multiple properties with active context, owner data, living area, state and internal notes.",
+    points: ["Property switcher", "Owner details", "Data export"],
   },
 ] as const;
 
 const securityItems = [
-  "Property-Scoping: alle Daten sind klar dem Objekt zugeordnet",
-  "Row Level Security: Nutzergrenzen bleiben auf Datenbankebene geschützt",
-  "Transparente Exporte: PDFs, Protokolle und ZIPs für die eigene Ablage",
-  "Keine Blackbox: nachvollziehbare Strukturen statt versteckter Prozesse",
+  "Property scoping keeps data tied to the right object",
+  "Row Level Security protects user boundaries at database level",
+  "Transparent exports for your own archive",
+  "Clear workflows instead of hidden black-box processes",
 ] as const;
 
 const pricingPoints = [
-  "Frühen Zugang vormerken, ohne direkt ein Konto anzulegen",
-  "Benachrichtigung, sobald die Registrierung wieder öffnet",
-  "Bestehende Nutzer können sich weiterhin normal einloggen",
-  "Kostenpflichtige Pläne werden vor Abschluss klar ausgewiesen",
+  "Reserve early access without creating an account immediately",
+  "Get notified when registration opens again",
+  "Existing users can keep logging in normally",
+  "Paid plans will be clearly shown before checkout",
 ] as const;
 
 const faqItems = [
   {
-    question: "Was kostet Mietfolio?",
+    question: "What does Mietfolio cost?",
     answer:
-      "Der Start ist kostenlos. Falls kostenpflichtige Pläne aktiviert werden, werden Preis, Leistungsumfang und Laufzeit vor der Buchung transparent angezeigt.",
+      "The start is free. If paid plans are activated, price, scope and term are shown clearly before booking.",
   },
   {
-    question: "Für wen ist Mietfolio gedacht?",
+    question: "Who is Mietfolio for?",
     answer:
-      "Für private Vermieter und kleine Verwaltungen, die Nebenkosten, Dokumente, Mieterkommunikation, Rauchmelder und Erinnerungen an einem Ort organisieren möchten.",
+      "Private landlords and small property managers who want service charges, documents, tenant communication, smoke alarms and reminders in one place.",
   },
   {
-    question: "Kann ich mehrere Immobilien verwalten?",
+    question: "Can I manage multiple properties?",
     answer:
-      "Ja. Mietfolio arbeitet mit einem aktiven Objektkontext, sodass Daten und Aufgaben sauber je Immobilie getrennt bleiben.",
+      "Yes. Mietfolio works with an active property context, so records and tasks stay separated by property.",
   },
   {
-    question: "Was kann der Mieterbereich?",
+    question: "What can the tenant portal do?",
     answer:
-      "Vermieter können Mieterzugänge einladen, Dokumente gezielt freigeben, Uploads prüfen, Portal-Nachrichten beantworten und Rauchmelderwartungen als Self-Service freischalten.",
+      "Landlords can invite tenant access, share selected documents, review uploads, answer portal messages and enable smoke-alarm maintenance self-service.",
   },
   {
-    question: "Wo werden die Daten gespeichert?",
+    question: "Where is the data stored?",
     answer:
-      "Mietfolio nutzt Supabase für Authentifizierung, Datenbank und Speicher (inkl. Edge Functions/Storage). Die Datenschutzerklärung enthält die vollständigen vertraglichen und Datenschutzangaben zu Auftragsverarbeitern und Regionen.",
+      "Mietfolio uses Supabase for authentication, database and storage, including edge functions and storage. The German privacy policy contains the full processor and region details.",
   },
   {
-    question: "Gibt es Exporte?",
+    question: "Does Mietfolio replace legal or tax advice?",
     answer:
-      "Ja. Die App unterstützt unter anderem PDF-Ausgaben für Abrechnungen und Protokolle sowie ZIP-Exporte für Dokumente.",
-  },
-  {
-    question: "Ersetzt Mietfolio Rechts- oder Steuerberatung?",
-    answer:
-      "Nein. Mietfolio hilft bei Struktur, Dokumentation und Vorbereitung, ersetzt aber keine individuelle rechtliche oder steuerliche Beratung.",
+      "No. Mietfolio helps with structure, documentation and preparation, but it does not replace individual legal or tax advice.",
   },
 ] as const;
 
 const previewSidebarLinks = [
-  ["dashboard", "Übersicht", true],
-  ["receipt_long", "Nebenkosten", false],
-  ["domain", "Immobilien", false],
-  ["groups", "Mieter", false],
-  ["forum", "Nachrichten", false],
-  ["notifications", "Hinweise", false],
-  ["description", "Dokumente", false],
-  ["build", "Rauchmelder", false],
+  ["dashboard", "Overview", true],
+  ["receipt_long", "Charges", false],
+  ["domain", "Properties", false],
+  ["groups", "Tenants", false],
+  ["forum", "Messages", false],
+  ["notifications", "Tasks", false],
+  ["description", "Documents", false],
+  ["build", "Alarms", false],
 ] as const;
 
 const previewCostItems = [
-  ["Grundsteuer", "1.240,50 €", "Umlagefähig", "account_balance"],
-  ["Versicherung", "892,30 €", "Umlagefähig", "shield"],
-  ["Wasser / Abwasser", "684,10 €", "Zählerwerte gepflegt", "water_drop"],
-  ["Wartung Heizung", "420,00 €", "§35a EStG", "heat_pump"],
+  ["Property tax", "1,240.50 EUR", "Allocable", "account_balance"],
+  ["Insurance", "892.30 EUR", "Allocable", "shield"],
+  ["Water", "684.10 EUR", "Meter readings kept", "water_drop"],
+  ["Heating service", "420.00 EUR", "Reviewed", "heat_pump"],
 ] as const;
 
 const mobilePreviewTabs = [
-  ["dashboard", "Übersicht", true],
-  ["groups", "Mieter", false],
-  ["description", "Dok.", false],
-  ["build", "Wartung", false],
-  ["notifications", "Hinweise", false],
+  ["dashboard", "Home", true],
+  ["groups", "Tenants", false],
+  ["description", "Docs", false],
+  ["build", "Service", false],
+  ["notifications", "Tasks", false],
 ] as const;
 
 const billingYear = new Date().getFullYear();
@@ -219,82 +198,86 @@ function getDateOffset(offsetDays: number) {
 }
 
 function formatDemoDate(offsetDays: number) {
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
-    month: "2-digit",
+    month: "short",
     year: "numeric",
   }).format(getDateOffset(offsetDays));
 }
 
 function formatDemoShortDate(offsetDays: number) {
-  return new Intl.DateTimeFormat("de-DE", {
+  return new Intl.DateTimeFormat("en-GB", {
     day: "2-digit",
     month: "2-digit",
   }).format(getDateOffset(offsetDays));
 }
 
 function getDueLabel(offsetDays: number) {
-  if (offsetDays === 0) return "Heute";
-  if (offsetDays === 1) return "Fällig morgen";
-  return offsetDays > 1 ? `Fällig in ${offsetDays} Tagen` : `Überfällig seit ${Math.abs(offsetDays)} Tagen`;
+  if (offsetDays === 0) return "Today";
+  if (offsetDays === 1) return "Due tomorrow";
+  return offsetDays > 1 ? `Due in ${offsetDays} days` : `${Math.abs(offsetDays)} days overdue`;
 }
 
 const operationRows = [
-  [formatDemoDate(3), "Rauchmelderprüfung", "Wohnung 2.OG rechts", getDueLabel(3), "bg-[#ff5a42]"],
-  [formatDemoDate(11), "Heizungswartung", "Musterstraße 12", getDueLabel(11), "bg-[#f0a83a]"],
-  [formatDemoDate(17), `Nebenkostenabrechnung ${billingYear}`, "Musterstraße 12", getDueLabel(17), "bg-[#ffcf5a]"],
-  [formatDemoDate(22), "Mietvertrag endet", "Wohnung 1.OG links", `In ${22} Tagen`, "bg-[#4ea8ff]"],
+  [formatDemoDate(3), "Smoke alarm check", "Sample Street 12", getDueLabel(3), "bg-[#ff5a42]"],
+  [formatDemoDate(11), "Heating service", "Sample Street 12", getDueLabel(11), "bg-[#f0a83a]"],
+  [formatDemoDate(17), `Service charge statement ${billingYear}`, "Sample Street 12", getDueLabel(17), "bg-[#ffcf5a]"],
+  [formatDemoDate(22), "Lease end review", "Apartment 1 left", `In ${22} days`, "bg-[#4ea8ff]"],
 ] as const;
 
 const previewReminders = [
-  ["Rauchmelder prüfen", formatDemoDate(2)],
-  ["Nebenkosten finalisieren", formatDemoDate(17)],
-  ["Mietende prüfen", formatDemoDate(22)],
+  ["Check smoke alarms", formatDemoDate(2)],
+  ["Finalize charges", formatDemoDate(17)],
+  ["Review lease end", formatDemoDate(22)],
 ] as const;
 
 const mobilePreviewTasks = [
-  [`Nebenkosten ${billingYear}`, formatDemoShortDate(17), "receipt_long"],
-  ["Rauchmelder prüfen", formatDemoShortDate(2), "build"],
+  [`Charges ${billingYear}`, formatDemoShortDate(17), "receipt_long"],
+  ["Alarm check", formatDemoShortDate(2), "build"],
 ] as const;
 
-const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`, "Terminvereinbarung"] as const;
+const messageItems = ["Question about statement", `Service charges ${billingYear}`, "Schedule appointment"] as const;
 ---
 <Layout
-  title="Mietfolio | Vermietung, Nebenkosten und Dokumente in einem System"
-  description="Mietfolio bündelt Nebenkosten, Dokumente, Mieter, Nachrichten, Rauchmelder und Fristen für private Vermieter in einer übersichtlichen SaaS-App."
-  canonicalPath="/"
-  ogLocaleAlternate="en_US"
+  lang="en"
+  ogLocale="en_US"
+  ogLocaleAlternate="de_DE"
+  title="Mietfolio | Rental management, service charges and documents in one system"
+  description="Mietfolio bundles service charges, documents, tenants, messages, smoke alarms and deadlines for private landlords in one clear SaaS app."
+  canonicalPath="/en"
+  socialImagePath="/og-image-en.png"
+  socialImageAlt="Mietfolio social preview with logo and product message"
   alternateLinks={[
     { hreflang: "de", href: "https://mietfolio.de/" },
     { hreflang: "en", href: "https://mietfolio.de/en" },
     { hreflang: "x-default", href: "https://mietfolio.de/" },
   ]}
 >
-  <Header />
-  
+  <Header locale="en" />
+
   <div class="min-h-screen bg-white font-body text-[#0b1422] antialiased selection:bg-[#bff3e5] selection:text-[#06231f]">
     <main id="top">
       <section class="relative flex overflow-hidden border-b border-[#dfe9e6] bg-[linear-gradient(120deg,#ffffff_0%,#ffffff_54%,#f3fbf8_100%)] pt-16 xl:min-h-[76svh]">
         <div class="mx-auto grid w-full max-w-[1440px] items-center gap-8 px-5 py-8 max-[359px]:gap-6 max-[359px]:py-6 sm:px-8 sm:py-10 lg:py-12 xl:grid-cols-[0.82fr_1.18fr] xl:gap-10 xl:px-12 xl:pb-5 xl:pt-14">
           <div class="relative z-10 w-full max-w-[690px]">
             <h1 class="max-w-[650px] font-headline text-4xl font-black leading-[1.03] text-[#0b1422] max-[359px]:text-[2.1rem] sm:text-5xl lg:text-6xl xl:text-7xl">
-              Vermietung steuern, bevor sie Arbeit wird
+              Manage rentals before they become work
             </h1>
             <p class="mt-6 max-w-xl text-lg leading-8 text-[#2d3d49] max-[359px]:mt-5 max-[359px]:text-base max-[359px]:leading-7 sm:text-xl">
-              Nebenkosten, Dokumente, Mieterportal, Rauchmelder, Nachrichten und Fristen laufen in einem System zusammen.
+              Service charges, documents, tenant portal, smoke alarms, messages and deadlines come together in one system.
             </p>
             <div class="mt-8 flex flex-col gap-3 max-[359px]:mt-7 sm:flex-row">
               <a class="inline-flex h-12 items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_18px_34px_rgba(0,107,91,0.26)] transition hover:-translate-y-0.5 hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4 focus-visible:ring-offset-4" href="/warteliste">
-                Zur Warteliste
+                Join the waitlist
                 <ArrowRight class="ml-2 h-4 w-4" />
               </a>
-              <a class="inline-flex h-12 items-center justify-center rounded-md border border-[rgba(0,107,91,0.45)] bg-white/[0.92] px-6 font-label text-base font-bold text-[#006b5b] shadow-[0_14px_30px_rgba(14,36,43,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="#funktionen">
-                Funktionen ansehen
+              <a class="inline-flex h-12 items-center justify-center rounded-md border border-[rgba(0,107,91,0.45)] bg-white/[0.92] px-6 font-label text-base font-bold text-[#006b5b] shadow-[0_14px_30px_rgba(14,36,43,0.08)] backdrop-blur transition hover:-translate-y-0.5 hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="#features">
+                View features
               </a>
             </div>
           </div>
+
           <div class="relative z-10 min-w-0">
-            <!-- Desktop Product Preview -->
             <div class="relative mx-auto hidden h-[560px] w-full max-w-[780px] overflow-hidden rounded-lg border border-[#dbe3e6] bg-[#faf8ff] text-left shadow-[0_34px_90px_rgba(14,36,43,0.16)] xl:block">
               <div class="flex h-12 items-center justify-between border-b border-slate-200/60 bg-white/[0.88] px-4 backdrop-blur">
                 <div class="flex items-center gap-5">
@@ -303,7 +286,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                     <span class="font-headline text-lg font-black tracking-tight text-brand-wordmark">Mietfolio</span>
                   </div>
                   <div class="hidden items-center gap-4 font-headline text-xs font-bold text-slate-500 lg:flex">
-                    {["Übersicht", "Immobilien", "Mieter", "Dokumente", "Nachrichten"].map((item, index) => (
+                    {["Overview", "Properties", "Tenants", "Documents", "Messages"].map((item, index) => (
                       <span class={index === 0 ? "text-[#1b6e60]" : ""}>
                         {item}
                       </span>
@@ -312,7 +295,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                 </div>
                 <div class="flex items-center gap-3">
                   <span class="hidden rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 sm:inline-flex">
-                    Musterstraße 12
+                    Sample Street 12
                   </span>
                   <MaterialSymbol icon="settings" className="text-lg text-slate-500" />
                   <span class="flex h-7 w-7 items-center justify-center rounded-full bg-[#d0e7e1] text-xs font-black text-[#174f45]">S</span>
@@ -322,12 +305,12 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
               <div class="grid h-[calc(100%-3rem)] grid-cols-[70px_1fr] md:grid-cols-[184px_1fr]">
                 <aside class="border-r border-slate-200/70 bg-[#f2f3ff] px-2 py-3 md:px-3">
                   <div class="mb-4 hidden items-center gap-3 px-2 md:flex">
-                    <span aria-hidden="true" class="inline-flex shrink-0 items-center justify-center rounded-xl bg-[#1b6e60] text-white shadow-sm h-9 w-9">
+                    <span aria-hidden="true" class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#1b6e60] text-white shadow-sm">
                       <MaterialSymbol icon="home_work" fill className="text-[1.55rem]" />
                     </span>
                     <div class="min-w-0">
-                      <p class="truncate font-headline text-xs font-bold text-[#1b6e60]">Musterstraße 12</p>
-                      <p class="truncate text-[10px] uppercase tracking-widest text-slate-600">Aktives Objekt</p>
+                      <p class="truncate font-headline text-xs font-bold text-[#1b6e60]">Sample Street 12</p>
+                      <p class="truncate text-[10px] uppercase tracking-widest text-slate-600">Active property</p>
                     </div>
                   </div>
                   <div class="space-y-1">
@@ -343,29 +326,29 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                     ))}
                   </div>
                   <div class="mt-4 hidden rounded-xl bg-[#1b6e60] px-3 py-2.5 text-center font-headline text-xs font-bold text-white md:block">
-                    Neue Position
+                    New item
                   </div>
                 </aside>
 
                 <div class="overflow-hidden bg-[#faf8ff] p-4 md:p-5">
                   <div class="mb-5 flex items-start justify-between gap-4">
                     <div>
-                      <p class="font-label text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Übersicht</p>
+                      <p class="font-label text-xs font-bold uppercase tracking-[0.18em] text-slate-500">Overview</p>
                       <h2 class="mt-1 font-headline text-lg font-black leading-tight text-[#131b2e] md:text-2xl">
-                        Nebenkostenabrechnung
+                        Service charge statement
                       </h2>
                     </div>
                     <div class="hidden items-center gap-2 md:flex">
                       <span class="rounded-xl border border-slate-200 bg-white px-3 py-2 text-xs font-bold text-slate-700">{billingYear}</span>
-                      <span class="rounded-xl bg-[#1b6e60] px-3 py-2 text-xs font-bold text-white">PDF-Export</span>
+                      <span class="rounded-xl bg-[#1b6e60] px-3 py-2 text-xs font-bold text-white">PDF export</span>
                     </div>
                   </div>
 
                   <div class="grid grid-cols-3 gap-3">
                     {[
-                      ["Gesamtkosten", "3.236,90 €", "receipt_long"],
-                      ["Vorauszahlung", "2.980,00 €", "payments"],
-                      ["Differenz", "256,90 €", "monitoring"],
+                      ["Total costs", "3,236.90 EUR", "receipt_long"],
+                      ["Advance", "2,980.00 EUR", "payments"],
+                      ["Balance", "256.90 EUR", "monitoring"],
                     ].map(([label, value, icon]) => (
                       <div class="rounded-2xl bg-white p-4 shadow-sm">
                         <div class="flex items-center justify-between">
@@ -380,8 +363,8 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                   <div class="mt-4 grid gap-4 lg:grid-cols-[1fr_220px]">
                     <div class="rounded-2xl bg-white p-4 shadow-sm">
                       <div class="mb-3 flex items-center justify-between">
-                        <h3 class="font-headline text-sm font-black text-[#131b2e]">Kostenpositionen</h3>
-                        <span class="text-xs font-bold text-[#1b6e60]">KI-Import</span>
+                        <h3 class="font-headline text-sm font-black text-[#131b2e]">Cost items</h3>
+                        <span class="text-xs font-bold text-[#1b6e60]">AI import</span>
                       </div>
                       <div class="space-y-2">
                         {previewCostItems.map(([title, amount, note, icon]) => (
@@ -401,7 +384,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
 
                     <div class="space-y-4">
                       <div class="rounded-2xl bg-white p-4 shadow-sm">
-                        <h3 class="font-headline text-sm font-black text-[#131b2e]">Hinweise</h3>
+                        <h3 class="font-headline text-sm font-black text-[#131b2e]">Tasks</h3>
                         <div class="mt-3 space-y-3">
                           {previewReminders.map(([title, date]) => (
                             <div class="flex gap-3">
@@ -414,8 +397,8 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                           ))}
                         </div>
                         <div class="mt-4 flex items-center justify-between rounded-xl bg-[#f8fafb] px-3 py-2">
-                          <span class="text-xs font-bold text-slate-500">Mieter</span>
-                          <span class="font-headline text-sm font-black text-[#1b6e60]">4 aktiv</span>
+                          <span class="text-xs font-bold text-slate-500">Tenants</span>
+                          <span class="font-headline text-sm font-black text-[#1b6e60]">4 active</span>
                         </div>
                       </div>
                     </div>
@@ -424,12 +407,11 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
               </div>
             </div>
 
-            <!-- Mobile Product Preview -->
             <div class="relative mx-auto h-[232px] w-full max-w-[560px] overflow-hidden rounded-[18px] border border-[#dbe3e6] bg-[#faf8ff] text-left shadow-[0_24px_64px_rgba(14,36,43,0.14)] min-[360px]:h-[250px] md:h-[360px] xl:hidden">
               <div class="flex h-12 items-center justify-between border-b border-slate-200/70 bg-white/92 px-4">
                 <div>
-                  <p class="font-headline text-base font-black tracking-tight text-[#1b6e60]">Übersicht</p>
-                  <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Musterstraße 12</p>
+                  <p class="font-headline text-base font-black tracking-tight text-[#1b6e60]">Overview</p>
+                  <p class="text-[9px] font-bold uppercase tracking-[0.18em] text-slate-500">Sample Street 12</p>
                 </div>
                 <div class="flex items-center gap-2.5">
                   <span class="rounded-full bg-[#edf8f4] px-2.5 py-1 font-label text-[11px] font-black text-[#1b6e60]">{billingYear}</span>
@@ -440,9 +422,9 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
               <div class="px-4 pb-16 pt-3">
                 <div class="flex items-start justify-between gap-3">
                   <div class="min-w-0">
-                    <p class="font-label text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Nebenkosten</p>
+                    <p class="font-label text-[10px] font-bold uppercase tracking-[0.18em] text-slate-500">Charges</p>
                     <h2 class="mt-1 truncate font-headline text-lg font-black leading-tight text-[#131b2e]">
-                      Abrechnung prüfen
+                      Review statement
                     </h2>
                   </div>
                   <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#1b6e60] text-white shadow-sm">
@@ -453,23 +435,23 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                 <div class="mt-3 grid grid-cols-2 gap-2.5">
                   <div class="rounded-2xl bg-white p-3 shadow-sm">
                     <div class="flex items-center justify-between gap-2">
-                      <span class="text-[11px] font-semibold text-slate-500">Gesamt</span>
+                      <span class="text-[11px] font-semibold text-slate-500">Total</span>
                       <MaterialSymbol icon="account_balance_wallet" className="text-base text-[#1b6e60]" />
                     </div>
-                    <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3.236,90 €</p>
+                    <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3,236.90 EUR</p>
                   </div>
                   <div class="rounded-2xl bg-white p-3 shadow-sm">
                     <div class="flex items-center justify-between gap-2">
-                      <span class="text-[11px] font-semibold text-slate-500">Hinweise</span>
+                      <span class="text-[11px] font-semibold text-slate-500">Tasks</span>
                       <MaterialSymbol icon="notifications" className="text-base text-[#1b6e60]" />
                     </div>
-                    <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3 offen</p>
+                    <p class="mt-2 whitespace-nowrap font-headline text-base font-black text-[#131b2e]">3 open</p>
                   </div>
                 </div>
 
                 <div class="mt-3 hidden rounded-2xl bg-white p-3 shadow-sm md:block">
                   <div class="mb-2 flex items-center justify-between">
-                    <h3 class="font-headline text-sm font-black text-[#131b2e]">Heute wichtig</h3>
+                    <h3 class="font-headline text-sm font-black text-[#131b2e]">Important today</h3>
                     <MaterialSymbol icon="arrow_forward" className="text-base text-[#1b6e60]" />
                   </div>
                   <div class="space-y-2">
@@ -499,14 +481,14 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
         </div>
       </section>
 
-      <section class="border-y border-[#dfe9e6] bg-white" aria-label="Produktvorteile">
+      <section class="border-y border-[#dfe9e6] bg-white" aria-label="Product benefits">
         <div class="mx-auto grid max-w-[1440px] px-5 sm:px-8 md:grid-cols-2 lg:grid-cols-4 lg:px-12">
           {proofItems.map(({ icon: Icon, title, text }, index) => (
             <div
-              class:list={[`flex min-h-28 gap-4 border-b border-[#dfe9e6] px-5 py-7 sm:px-6 lg:px-8`, 
-                index % 2 === 0 ? "md:border-r" : "", 
-                index >= 2 ? "md:border-b-0" : "", 
-                "lg:border-b-0 lg:border-r", 
+              class:list={[`flex min-h-28 gap-4 border-b border-[#dfe9e6] px-5 py-7 sm:px-6 lg:px-8`,
+                index % 2 === 0 ? "md:border-r" : "",
+                index >= 2 ? "md:border-b-0" : "",
+                "lg:border-b-0 lg:border-r",
                 index === proofItems.length - 1 ? "lg:border-r-0" : ""
               ]}
             >
@@ -522,29 +504,27 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
         </div>
       </section>
 
-      <section id="ablauf" class="scroll-mt-20 border-b border-[#dfe9e6] bg-white">
+      <section id="workflow" class="scroll-mt-20 border-b border-[#dfe9e6] bg-white">
         <div class="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[1.2fr_1fr_1fr_1fr_auto] lg:items-start lg:px-12">
           <div class="lg:pr-4">
             <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
-              In drei Schritten alles im Griff
+              Everything under control in three steps
             </h2>
             <p class="mt-4 text-base leading-7 text-[#5c6b74]">
-              Ein klarer Ablauf für weniger Hin und Her und mehr Zeit für das Wesentliche.
+              A clear workflow for less back-and-forth and more time for the important work.
             </p>
             <a
               class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4"
-              href="#funktionen"
+              href="#features"
             >
-              So funktioniert's
+              See how it works
               <ArrowRight class="ml-2 h-4 w-4" />
             </a>
           </div>
 
           <div class="grid gap-8 md:grid-cols-3 md:gap-6 lg:col-span-3 lg:gap-6">
             {workflowSteps.map((step, index) => (
-              <article
-                class="relative flex h-full flex-col"
-              >
+              <article class="relative flex h-full flex-col">
                 <div class="relative">
                   {index < workflowSteps.length - 1 ? (
                     <span
@@ -561,41 +541,27 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
               </article>
             ))}
           </div>
-
-          <div class="hidden items-center justify-end self-center lg:flex">
-            <div class="relative flex items-center justify-center h-28 w-28 rounded-2xl border border-[#d9ebe6] bg-[#f4fbf8]/50 shadow-[0_8px_24px_rgba(14,36,43,0.04)] overflow-hidden">
-              <div class="absolute -bottom-6 -left-6 h-20 w-20 rounded-full bg-[#e6f5f0]/85" />
-              <div class="absolute -top-6 -right-6 h-16 w-16 rounded-full bg-[#e6f5f0]/50" />
-              
-              <div class="relative h-16 w-16 text-[#006b5b]">
-                <Building2 class="absolute bottom-0 left-0 h-14 w-14" strokeWidth={1.25} />
-                <div class="absolute -bottom-1 -right-1 flex h-8 w-8 items-center justify-center rounded-lg border border-[#d9ebe6] bg-white text-[#006b5b] shadow-sm">
-                  <Home class="h-5 w-5 text-[#4ea896]" strokeWidth={1.6} />
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       </section>
 
-      <section id="funktionen" class="scroll-mt-20 border-b border-[#dfe9e6] bg-[#fbfdfc]">
+      <section id="features" class="scroll-mt-20 border-b border-[#dfe9e6] bg-[#fbfdfc]">
         <div class="mx-auto max-w-[1440px] px-5 py-16 sm:px-8 lg:px-12">
           <div class="grid gap-8 lg:grid-cols-[260px_1fr]">
             <div>
               <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
-                Alle wichtigen Bereiche. Ein System.
+                All core areas. One system.
               </h2>
               <p class="mt-4 text-base leading-7 text-[#5c6b74]">
-                Mietfolio verbindet die zentralen Vermieteraufgaben in einem gemeinsamen Objektkontext.
+                Mietfolio connects the central landlord workflows in one shared property context.
               </p>
-              <a class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="#app-ueberblick">
-                App-Übersicht ansehen
+              <a class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="#app-overview">
+                View app overview
                 <ArrowRight class="ml-2 h-4 w-4" />
               </a>
             </div>
 
             <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-              {modules.map(({ icon: Icon, title, text, href, points }) => (
+              {modules.map(({ icon: Icon, title, text, points }) => (
                 <article class="group flex min-h-72 flex-col rounded-lg border border-[#dfe9e6] bg-white p-5 shadow-[0_10px_28px_rgba(14,36,43,0.05)] transition duration-200 hover:-translate-y-1 hover:border-[#b9d3cc] hover:shadow-[0_18px_42px_rgba(14,36,43,0.09)]">
                   <Icon class="h-8 w-8 text-[#006b5b]" strokeWidth={1.8} />
                   <h3 class="mt-7 font-headline text-lg font-extrabold text-[#0b1422]">{title}</h3>
@@ -608,10 +574,6 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                       </li>
                     ))}
                   </ul>
-                  <a class="mt-auto inline-flex items-center rounded-md pt-5 font-label text-sm font-bold text-[#006b5b] transition group-hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href={href} aria-label={`${title} Details ansehen`}>
-                    Details ansehen
-                    <ChevronRight class="ml-1 h-4 w-4" />
-                  </a>
                 </article>
               ))}
             </div>
@@ -619,26 +581,26 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
         </div>
       </section>
 
-      <section id="app-ueberblick" class="scroll-mt-20 bg-[#003f3f] text-white">
+      <section id="app-overview" class="scroll-mt-20 bg-[#003f3f] text-white">
         <div class="mx-auto grid max-w-[1440px] gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[250px_1fr_230px] lg:px-12">
           <div>
             <h2 class="font-headline text-3xl font-black leading-tight">
-              Aufgaben und Fristen, auf einen Blick
+              Tasks and deadlines at a glance
             </h2>
             <p class="mt-4 text-base leading-7 text-[#c9dfdc]">
-              Sehen, was bei Ihren Objekten ansteht: Abrechnung, Nachrichten, Wartung und Vertragsfristen.
+              See what needs attention across your properties: statements, messages, maintenance and lease deadlines.
             </p>
             <a class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#9de4cf] transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9de4cf]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="/auth">
-              App öffnen
+              Open app
               <ArrowRight class="ml-2 h-4 w-4" />
             </a>
           </div>
 
           <div class="overflow-hidden rounded-lg border border-white/[0.16] bg-white/[0.05] shadow-[0_26px_60px_rgba(0,0,0,0.22)]">
             <div class="hidden grid-cols-[105px_1.2fr_1fr_120px] gap-4 border-b border-white/10 px-5 py-3 font-label text-xs font-bold uppercase text-[#9de4cf] md:grid">
-              <span>Datum</span>
-              <span>Vorgang</span>
-              <span>Objekt</span>
+              <span>Date</span>
+              <span>Task</span>
+              <span>Property</span>
               <span>Status</span>
             </div>
             <div>
@@ -658,7 +620,7 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
 
           <aside class="rounded-lg border border-white/[0.16] bg-white/[0.06] p-5">
             <div class="flex items-center justify-between">
-              <h3 class="font-headline text-lg font-extrabold">Offene Nachrichten</h3>
+              <h3 class="font-headline text-lg font-extrabold">Open messages</h3>
               <span class="rounded-md bg-[rgba(157,228,207,0.15)] px-2 py-1 font-label text-xs font-bold text-[#9de4cf]">3</span>
             </div>
             <div class="mt-5 space-y-4">
@@ -669,27 +631,27 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
                   </span>
                   <div>
                     <p class="font-label text-sm font-bold">{item}</p>
-                    <p class="mt-0.5 text-xs text-[#c9dfdc]">{index === 0 ? "Heute" : index === 1 ? "Gestern" : "Vor 2 Tagen"}</p>
+                    <p class="mt-0.5 text-xs text-[#c9dfdc]">{index === 0 ? "Today" : index === 1 ? "Yesterday" : "2 days ago"}</p>
                   </div>
                 </div>
               ))}
             </div>
             <a class="mt-6 inline-flex items-center rounded-md font-label text-sm font-bold text-[#9de4cf] transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#9de4cf]/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="/auth">
-              Alle Nachrichten anzeigen
+              View all messages
               <ArrowRight class="ml-2 h-4 w-4" />
             </a>
           </aside>
         </div>
       </section>
 
-      <section id="sicherheit" class="scroll-mt-20 border-b border-[#dfe9e6] bg-white">
+      <section id="security" class="scroll-mt-20 border-b border-[#dfe9e6] bg-white">
         <div class="mx-auto grid max-w-[1440px] items-center gap-8 px-5 py-12 sm:px-8 lg:grid-cols-[260px_1fr] lg:px-12">
           <div class="flex items-center gap-5">
             <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border border-[#dfe9e6] bg-white text-[#006b5b] shadow-[0_16px_36px_rgba(14,36,43,0.08)]">
               <LockKeyhole class="h-7 w-7" strokeWidth={1.8} />
             </span>
             <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
-              Ihre Daten. Ihre Kontrolle.
+              Your data. Your control.
             </h2>
           </div>
           <div class="grid gap-5 md:grid-cols-4">
@@ -703,18 +665,17 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
         </div>
       </section>
 
-      <section id="preis" class="scroll-mt-20 border-b border-[#dfe9e6] bg-[#fbfdfc]">
+      <section id="pricing" class="scroll-mt-20 border-b border-[#dfe9e6] bg-[#fbfdfc]">
         <div class="mx-auto grid max-w-[1440px] gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start lg:px-12">
           <div>
             <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422] md:text-4xl">
-              Start in Kürze. Warteliste offen.
+              Launching soon. Waitlist open.
             </h2>
             <p class="mt-4 max-w-xl text-base leading-7 text-[#5c6b74]">
-              Die Registrierung ist aktuell pausiert. Tragen Sie sich ein und wir melden uns, sobald neue Zugänge zur App
-              freigeschaltet werden.
+              Registration is currently paused. Join the waitlist and we will let you know when new app access opens.
             </p>
             <a class="mt-6 inline-flex h-12 items-center justify-center rounded-md bg-[#006b5b] px-6 font-label text-base font-bold text-white shadow-[0_18px_34px_rgba(0,107,91,0.22)] transition hover:-translate-y-0.5 hover:bg-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4" href="/warteliste">
-              Auf die Warteliste
+              Join the waitlist
               <ArrowRight class="ml-2 h-4 w-4" />
             </a>
           </div>
@@ -724,14 +685,14 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
               <div class="flex items-center justify-between gap-4">
                 <div>
                   <h3 class="font-headline text-xl font-black text-[#0b1422]">Start</h3>
-                  <p class="mt-1 text-sm leading-6 text-[#5c6b74]">Für die erste echte Prüfung im Alltag.</p>
+                  <p class="mt-1 text-sm leading-6 text-[#5c6b74]">For the first real daily review.</p>
                 </div>
                 <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[#e7f7f1] text-[#006b5b]">
                   <Euro class="h-5 w-5" strokeWidth={2.2} />
                 </span>
               </div>
-              <p class="mt-7 font-headline text-4xl font-black text-[#0b1422]">Kostenlos</p>
-              <p class="mt-2 text-sm font-semibold text-[#5c6b74]">Starten ohne automatische Zahlung.</p>
+              <p class="mt-7 font-headline text-4xl font-black text-[#0b1422]">Free</p>
+              <p class="mt-2 text-sm font-semibold text-[#5c6b74]">Start without automatic payment.</p>
               <ul class="mt-6 space-y-3">
                 {pricingPoints.map((item) => (
                   <li class="flex gap-3 text-sm leading-6 text-[#2d3d49]">
@@ -745,17 +706,16 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
             <div class="grid gap-4">
               <article class="rounded-lg border border-[#dfe9e6] bg-white p-5">
                 <Server class="h-7 w-7 text-[#006b5b]" strokeWidth={1.8} />
-                <h3 class="mt-5 font-headline text-lg font-extrabold text-[#0b1422]">Daten bewusst getrennt</h3>
+                <h3 class="mt-5 font-headline text-lg font-extrabold text-[#0b1422]">Data separated deliberately</h3>
                 <p class="mt-3 text-sm leading-6 text-[#5c6b74]">
-                  Objekt- und Nutzerdaten bleiben technisch im vorgesehenen App-Kontext.
+                  Property and user data remain in the intended app context.
                 </p>
               </article>
               <article class="rounded-lg border border-[#dfe9e6] bg-white p-5">
                 <FileText class="h-7 w-7 text-[#006b5b]" strokeWidth={1.8} />
-                <h3 class="mt-5 font-headline text-lg font-extrabold text-[#0b1422]">Kein Beratungsversprechen</h3>
+                <h3 class="mt-5 font-headline text-lg font-extrabold text-[#0b1422]">No advisory promise</h3>
                 <p class="mt-3 text-sm leading-6 text-[#5c6b74]">
-                  Mietfolio hilft beim Organisieren und Exportieren, ersetzt aber keine individuelle Rechts- oder
-                  Steuerberatung.
+                  Mietfolio helps with organization and exports, but does not replace individual legal or tax advice.
                 </p>
               </article>
             </div>
@@ -767,13 +727,13 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
         <div class="mx-auto grid max-w-[1440px] gap-8 px-5 py-16 sm:px-8 lg:grid-cols-[300px_1fr] lg:px-12">
           <div>
             <h2 class="font-headline text-3xl font-black leading-tight text-[#0b1422]">
-              Häufige Fragen
+              Frequently asked questions
             </h2>
             <p class="mt-4 text-base leading-7 text-[#5c6b74]">
-              Die wichtigsten Antworten vor dem ersten Login.
+              The most important answers before the first login.
             </p>
             <a class="mt-5 inline-flex items-center rounded-md font-label text-sm font-bold text-[#006b5b] transition hover:text-[#005346] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/35 focus-visible:ring-offset-4" href="/kontakt">
-              Frage stellen
+              Ask a question
               <Mail class="ml-2 h-4 w-4" />
             </a>
           </div>
@@ -796,25 +756,25 @@ const messageItems = ["Rückfrage zur Abrechnung", `Nebenkosten ${billingYear}`,
         <div class="mx-auto flex max-w-[1440px] flex-col gap-8 px-5 py-16 sm:px-8 md:flex-row md:items-center md:justify-between lg:px-12">
           <div>
             <h2 class="font-headline text-3xl font-black leading-tight md:text-4xl">
-              Zugang vormerken und später starten.
+              Reserve access and start later.
             </h2>
             <p class="mt-3 max-w-2xl text-base leading-7 text-[#c9dfdc]">
-              Wir öffnen die Registrierung schrittweise. Die Warteliste ist der aktuelle Weg zu einem neuen Zugang.
+              Registration opens in stages. The waitlist is currently the way to request new access.
             </p>
           </div>
           <div class="flex flex-col gap-3 sm:flex-row">
             <a class="inline-flex h-12 items-center justify-center rounded-md bg-white px-6 font-label text-base font-bold text-[#003f3f] transition hover:-translate-y-0.5 hover:bg-[#e9f6f2] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="/warteliste">
-              Auf die Warteliste
+              Join the waitlist
               <ArrowRight class="ml-2 h-4 w-4" />
             </a>
-            <a class="inline-flex h-12 items-center justify-center rounded-md border border-white/[0.28] px-6 font-label text-base font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="#funktionen">
-              Funktionen ansehen
+            <a class="inline-flex h-12 items-center justify-center rounded-md border border-white/[0.28] px-6 font-label text-base font-bold text-white transition hover:-translate-y-0.5 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70 focus-visible:ring-offset-4 focus-visible:ring-offset-[#003f3f]" href="#features">
+              View features
             </a>
           </div>
         </div>
       </section>
     </main>
   </div>
-  
-  <Footer />
+
+  <Footer locale="en" />
 </Layout>

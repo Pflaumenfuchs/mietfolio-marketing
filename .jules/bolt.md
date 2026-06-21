@@ -1,0 +1,3 @@
+## 2024-06-21 - Inline Critical SVGs
+**Learning:** The brand logo (`logo.svg`) was loaded as an external image via `<img>` tag in the `AppIcon.astro` component, which is heavily used including right in the header of the page. This causes a separate network request that blocks LCP/FCP rendering. Because it's an extremely small and simple SVG, the cost of externalizing it is higher than its payload size.
+**Action:** Inline small, critical SVGs directly in the code (e.g. Astro components) rather than loading them via `<img src="...">` tags to speed up initial rendering and reduce unnecessary network requests.

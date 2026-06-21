@@ -2,7 +2,7 @@
 import LegalLayout from "../layouts/LegalLayout.astro";
 import Section from "../components/Section.astro";
 
-const legalUpdatedAt = "15.06.2026";
+const legalUpdatedAt = "21.06.2026";
 
 const legalContact = {
   operator: "Sebastian Taatz Consulting UG (haftungsbeschränkt)",
@@ -32,7 +32,7 @@ const legalProviders = {
   },
   google: {
     provider: "Google Ireland Limited / Google LLC",
-    service: "Google Fonts und Google Gemini API für optionale Dokumentenanalyse",
+    service: "Google Gemini API für optionale Dokumentenanalyse",
     privacy: "https://policies.google.com/privacy",
   },
 };
@@ -121,19 +121,16 @@ const legalProviders = {
     </ul>
   </Section>
 
-  <Section title="6. Externe Schriftarten und Website-Ressourcen">
+  <Section title="6. Lokale Schriftarten und Website-Ressourcen">
     <p>
-      Die Website bindet Google Fonts und Material Symbols über Google-Server ein. Dabei kann Ihr Browser
-      Verbindungsdaten an Google übermitteln, insbesondere IP-Adresse, Browserinformationen und die abgerufene
-      Schriftressource. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser Interesse an einer konsistenten,
-      performanten Darstellung der Benutzeroberfläche.
+      Die Website und App verwenden lokal ausgelieferte Schriftarten und Icons. Beim Laden dieser Ressourcen
+      baut Ihr Browser keine Verbindung zu Google-Fonts-Servern auf. Die Dateien werden wie andere statische
+      Website-Ressourcen über den Website-Host ausgeliefert und können durch Browser oder CDN
+      zwischengespeichert werden.
     </p>
     <p>
-      Anbieter: {legalProviders.google.provider}. Weitere Informationen:{" "}
-      <a class="underline underline-offset-4" href={legalProviders.google.privacy} target="_blank" rel="noopener noreferrer">
-        Google-Datenschutzhinweise
-      </a>
-      .
+      Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO, unser berechtigtes Interesse an einer konsistenten,
+      performanten und datensparsamen Darstellung der Benutzeroberfläche.
     </p>
   </Section>
 
@@ -142,9 +139,9 @@ const legalProviders = {
       Solange die Registrierung pausiert ist, können Interessenten sich auf die Warteliste eintragen. Wir
       verarbeiten dabei die E-Mail-Adresse, optional den Namen, optional die Portfolio-Größe sowie technische
       Metadaten zur Übermittlung. Zweck ist die Vormerkung und Benachrichtigung, sobald neue Zugänge
-      freigeschaltet werden. Die Verarbeitung erfolgt auf Grundlage von Art. 6 Abs. 1 lit. a DSGVO bzw. Art. 6
-      Abs. 1 lit. f DSGVO für Betrieb und Missbrauchsprävention. Eine Abmeldung oder Löschung ist jederzeit über
-      das Kontaktformular möglich.
+      freigeschaltet werden. Rechtsgrundlage ist Art. 6 Abs. 1 lit. b DSGVO für vorvertragliche Anfragen und
+      Art. 6 Abs. 1 lit. f DSGVO für Betrieb, Nachweisbarkeit und Missbrauchsprävention. Eine Abmeldung oder
+      Löschung ist jederzeit über das Kontaktformular möglich.
     </p>
     <p>
       Für die Registrierung, Anmeldung, Passwortzurücksetzung und Kontoverwaltung verarbeiten wir Account-,

@@ -95,6 +95,7 @@ const copy = locale === "en"
         type="button"
         aria-label={copy.menuOpen}
         aria-expanded="false"
+        aria-controls="mobile-menu"
         data-open-label={copy.menuOpen}
         data-close-label={copy.menuClose}
       >
@@ -171,5 +172,17 @@ const copy = locale === "en"
       button?.setAttribute('aria-expanded', 'false');
       button?.setAttribute('aria-label', button.dataset.openLabel || 'Menü öffnen');
     });
+  });
+
+  // Close mobile menu on Escape key press and restore focus
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menu && !menu.classList.contains('hidden')) {
+      menu.classList.add('hidden');
+      openIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      button?.setAttribute('aria-expanded', 'false');
+      button?.setAttribute('aria-label', button?.dataset.openLabel || 'Menü öffnen');
+      button?.focus();
+    }
   });
 </script>

@@ -93,6 +93,7 @@ const copy = locale === "en"
         id="mobile-menu-button"
         class="inline-flex h-10 w-10 items-center justify-center rounded-md border border-[#d7e3e0] bg-white text-[#006b5b] shadow-[0_8px_22px_rgba(14,36,43,0.08)] transition hover:border-[#006b5b]/45 hover:bg-[#f7fbf9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#006b5b]/45 focus-visible:ring-offset-4 md:hidden"
         type="button"
+        aria-controls="mobile-menu"
         aria-label={copy.menuOpen}
         aria-expanded="false"
         data-open-label={copy.menuOpen}
@@ -144,6 +145,14 @@ const copy = locale === "en"
   const openIcon = document.getElementById('menu-open-icon');
   const closeIcon = document.getElementById('menu-close-icon');
 
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    openIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+    button?.setAttribute('aria-expanded', 'false');
+    button?.setAttribute('aria-label', button?.dataset.openLabel || 'Menü öffnen');
+  };
+
   button?.addEventListener('click', () => {
     const isHidden = menu?.classList.contains('hidden');
     if (isHidden) {
@@ -153,23 +162,21 @@ const copy = locale === "en"
       button.setAttribute('aria-expanded', 'true');
       button.setAttribute('aria-label', button.dataset.closeLabel || 'Menü schließen');
     } else {
-      menu?.classList.add('hidden');
-      openIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-label', button.dataset.openLabel || 'Menü öffnen');
+      closeMenu();
     }
   });
 
   // Close mobile menu on link clicks
   const links = menu?.querySelectorAll('a');
   links?.forEach(link => {
-    link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
-      openIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      button?.setAttribute('aria-expanded', 'false');
-      button?.setAttribute('aria-label', button.dataset.openLabel || 'Menü öffnen');
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close mobile menu on Escape key press
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
+      closeMenu();
+      button?.focus();
+    }
   });
 </script>

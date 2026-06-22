@@ -1,0 +1,4 @@
+## 2024-06-22 - Prevent Backend Error Leakage in Frontend Forms
+**Vulnerability:** The waitlist form was directly throwing and displaying the `data.error` value from all non-success responses (e.g. 500 errors) to the user. This could expose internal backend error details, database structure, or stack traces directly in the UI if the backend failed unexpectedly.
+**Learning:** Returning unvalidated `data.error` strings to the UI is dangerous. It assumes the API consistently filters error messages, which often breaks during unhandled exceptions on the server.
+**Prevention:** Always fail securely on the frontend. Only display specific API error messages for known client-side errors (like `400 Bad Request` validation errors). For any other error status codes (e.g., `500 Internal Server Error`), fallback to a generic, safe error message (e.g. "Die Warteliste ist gerade nicht erreichbar. Bitte versuchen Sie es später noch einmal.").

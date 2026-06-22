@@ -272,8 +272,10 @@ const waitlistHighlights = [
       if (!response.ok || !data.success) {
         if (response.status === 400) {
           emailInput.setAttribute('aria-invalid', 'true');
+          throw new Error(data.error || defaultWaitlistError);
         }
-        throw new Error(data.error || defaultWaitlistError);
+        // Fail securely: Only show specific error on 400 Bad Request, otherwise show default to prevent leaking internal backend errors
+        throw new Error(defaultWaitlistError);
       }
 
       formContainer?.classList.add('hidden');

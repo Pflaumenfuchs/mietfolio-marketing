@@ -273,7 +273,7 @@ const waitlistHighlights = [
         if (response.status === 400) {
           emailInput.setAttribute('aria-invalid', 'true');
         }
-        throw new Error(data.error || defaultWaitlistError);
+        throw new Error(defaultWaitlistError);
       }
 
       formContainer?.classList.add('hidden');

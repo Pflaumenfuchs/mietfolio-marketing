@@ -1,0 +1,3 @@
+## 2024-06-23 - Accessibility for Custom Overlays in Astro
+**Learning:** Custom vanilla JS overlays in Astro components (e.g. mobile menus triggered by toggle buttons) require explicit ARIA linkage (`aria-controls`) and keyboard interaction management (e.g. listening for `Escape` to close the overlay and explicitly restoring focus to the original trigger button `button.focus()`). Missing these makes the UI trap screen reader users and break keyboard navigability.
+**Action:** When building overlays in Astro components, always use `aria-controls` on the trigger, and handle the `Escape` key to securely close and restore focus.

@@ -1,0 +1,3 @@
+## 2024-06-23 - Vite assetsInlineLimit and Critical SVG Assets
+**Learning:** `vite.build.assetsInlineLimit` is set to 0 in `astro.config.mjs` for this Astro application. This means Vite will not automatically inline any assets (even small ones) into the HTML as data URIs. Using standard `<img>` tags for small critical components like `AppIcon` forces additional, synchronous HTTP requests, hurting First Contentful Paint (FCP) and Largest Contentful Paint (LCP) during initial load.
+**Action:** Always check the Vite configuration. If `assetsInlineLimit` is 0 or low, small SVG assets used in critical above-the-fold areas (like logos or layout icons) must be manually pasted and fully inlined as raw `<svg>` elements inside Astro components to bypass the network request cost.

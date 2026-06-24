@@ -1,0 +1,3 @@
+## 2026-06-24 - SVG Inlining and `assetsInlineLimit`
+**Learning:** In Astro/Vite configurations where `vite.build.assetsInlineLimit` is set to `0`, small SVGs used in frequently rendered components (like logos) will still trigger network requests instead of being automatically inlined into the HTML.
+**Action:** When working on this codebase, always manually inline critical, small SVG icons directly into Astro components to eliminate render-blocking network requests and improve FCP/LCP metrics.

@@ -8,10 +8,23 @@ interface Props {
 const { alt = "", className = "", imageClassName = "" } = Astro.props;
 ---
 <span class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}>
-  <img
-    alt={alt}
+  {/* Performance optimization: Inlining the SVG reduces network requests since vite.build.assetsInlineLimit is 0 */}
+  <svg
     class:list={["h-full w-full object-contain", imageClassName]}
-    draggable="false"
-    src="/logo.svg"
-  />
+    aria-label={alt || undefined}
+    role={alt ? "img" : undefined}
+    aria-hidden={!alt ? "true" : undefined}
+    viewBox="0 0 100 100"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="100" height="100" rx="20" fill="#faf8ff"/>
+    <rect x="10" y="10" width="24" height="24" rx="2" fill="#003441"/>
+    <rect x="66" y="10" width="24" height="24" rx="2" fill="#003441"/>
+    <rect x="10" y="38" width="24" height="24" rx="2" fill="#003441"/>
+    <rect x="38" y="38" width="24" height="24" rx="2" fill="#003441"/>
+    <rect x="66" y="38" width="24" height="24" rx="2" fill="#003441"/>
+    <rect x="10" y="66" width="24" height="24" rx="2" fill="#003441"/>
+    <rect x="66" y="66" width="24" height="24" rx="2" fill="#003441"/>
+  </svg>
 </span>

@@ -95,6 +95,7 @@ const copy = locale === "en"
         type="button"
         aria-label={copy.menuOpen}
         aria-expanded="false"
+        aria-controls="mobile-menu"
         data-open-label={copy.menuOpen}
         data-close-label={copy.menuClose}
       >
@@ -144,6 +145,14 @@ const copy = locale === "en"
   const openIcon = document.getElementById('menu-open-icon');
   const closeIcon = document.getElementById('menu-close-icon');
 
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    openIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+    button?.setAttribute('aria-expanded', 'false');
+    button?.setAttribute('aria-label', button?.dataset.openLabel || 'Menü öffnen');
+  };
+
   button?.addEventListener('click', () => {
     const isHidden = menu?.classList.contains('hidden');
     if (isHidden) {
@@ -153,23 +162,21 @@ const copy = locale === "en"
       button.setAttribute('aria-expanded', 'true');
       button.setAttribute('aria-label', button.dataset.closeLabel || 'Menü schließen');
     } else {
-      menu?.classList.add('hidden');
-      openIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      button.setAttribute('aria-expanded', 'false');
-      button.setAttribute('aria-label', button.dataset.openLabel || 'Menü öffnen');
+      closeMenu();
     }
   });
 
   // Close mobile menu on link clicks
   const links = menu?.querySelectorAll('a');
   links?.forEach(link => {
-    link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
-      openIcon?.classList.remove('hidden');
-      closeIcon?.classList.add('hidden');
-      button?.setAttribute('aria-expanded', 'false');
-      button?.setAttribute('aria-label', button.dataset.openLabel || 'Menü öffnen');
-    });
+    link.addEventListener('click', closeMenu);
+  });
+
+  // Close mobile menu on Escape key press
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !menu?.classList.contains('hidden')) {
+      closeMenu();
+      button?.focus();
+    }
   });
 </script>

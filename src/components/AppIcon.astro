@@ -1,17 +1,26 @@
 ---
+// ⚡ Bolt Optimization: Manually inlining the logo SVG using Vite's ?raw import.
+// This prevents a blocking network request for a critical above-the-fold asset.
+import logoRaw from "../../public/logo.svg?raw";
+
 interface Props {
   alt?: string;
   className?: string;
   imageClassName?: string;
 }
 
-const { alt = "", className = "", imageClassName = "" } = Astro.props;
+// Ensure alt="" is respected for decorative images (don't fall back to "Mietfolio Logo" if explicitly empty)
+const { alt, className = "", imageClassName = "" } = Astro.props;
 ---
-<span class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}>
-  <img
-    alt={alt}
-    class:list={["h-full w-full object-contain", imageClassName]}
+<span
+  class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}
+  role="img"
+  aria-label={alt !== undefined ? alt : "Mietfolio Logo"}
+>
+  <span
+    class:list={["flex h-full w-full items-center justify-center [&_svg]:h-full [&_svg]:w-full [&_svg]:object-contain", imageClassName]}
     draggable="false"
-    src="/logo.svg"
-  />
+  >
+    <Fragment set:html={logoRaw} />
+  </span>
 </span>

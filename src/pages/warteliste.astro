@@ -130,6 +130,7 @@ const waitlistHighlights = [
                     id="waitlist-name"
                     name="name"
                     autocomplete="name"
+                    maxlength="100"
                     class="h-12 rounded-md border border-[#d7e3e0] bg-white px-4 text-base text-[#0b1422] outline-none transition placeholder:text-[#7a8992] focus:border-[#006b5b] focus:ring-4 focus:ring-[#006b5b]/10"
                     placeholder="Optional"
                   />
@@ -145,6 +146,7 @@ const waitlistHighlights = [
                     type="email"
                     required
                     autocomplete="email"
+                    maxlength="150"
                     aria-describedby="waitlist-error-message"
                     class="h-12 rounded-md border border-[#d7e3e0] bg-white px-4 text-base text-[#0b1422] outline-none transition placeholder:text-[#7a8992] focus:border-[#006b5b] focus:ring-4 focus:ring-[#006b5b]/10"
                     placeholder="name@beispiel.de"
@@ -279,10 +281,8 @@ const waitlistHighlights = [
       formContainer?.classList.add('hidden');
       successContainer?.classList.remove('hidden');
     } catch (err: any) {
-      const message = typeof err?.message === 'string' && !/fetch|network/i.test(err.message)
-        ? err.message
-        : defaultWaitlistError;
-      showError(message);
+      console.error('Waitlist submission failed:', err);
+      showError(defaultWaitlistError);
     } finally {
       submitBtn.disabled = false;
       spinner.classList.add('hidden');

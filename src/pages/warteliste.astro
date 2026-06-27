@@ -282,7 +282,8 @@ const waitlistHighlights = [
 
       formContainer?.classList.add('hidden');
       successContainer?.classList.remove('hidden');
-    } catch {
+    } catch (error) {
+      console.error('Waitlist error:', error);
       showError(defaultWaitlistError);
     } finally {
       submitBtn.disabled = false;

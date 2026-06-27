@@ -1,0 +1,3 @@
+## 2025-02-23 - SVG Inlining with Vite in Astro
+**Learning:** In Astro, if `vite.build.assetsInlineLimit` is configured to 0, Vite won't automatically inline assets like SVGs into the bundle. This means `<img src="/logo.svg" />` results in a separate blocking network request, hurting Largest Contentful Paint (LCP) and First Contentful Paint (FCP) when the image is critical (like the main brand logo).
+**Action:** For critical above-the-fold SVGs, manually inline them into Astro components using Vite's `?raw` suffix (e.g., `import logo from '../../public/logo.svg?raw';`) and render via `set:html` on a wrapper element with appropriate ARIA attributes for accessibility.

@@ -1,0 +1,3 @@
+## 2023-10-24 - Accessible Required Field Indicators
+**Learning:** Adding visual indicators (like an asterisk *) to required form fields is important for UX, but screen readers may announce them verbatim (e.g., "star"). Relying solely on the HTML `required` attribute leaves sighted users guessing, while relying solely on the asterisk makes the screen reader experience worse.
+**Action:** When adding visual indicators for required form fields (e.g., `*`), use `<span aria-hidden="true">*</span>` to prevent screen readers from reading out the character and rely on the HTML `required` attribute for semantic accessibility.

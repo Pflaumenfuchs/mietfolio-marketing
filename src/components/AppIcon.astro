@@ -1,4 +1,6 @@
 ---
+import logoSvg from '../../public/logo.svg?raw';
+
 interface Props {
   alt?: string;
   className?: string;
@@ -8,10 +10,11 @@ interface Props {
 const { alt = "", className = "", imageClassName = "" } = Astro.props;
 ---
 <span class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}>
-  <img
-    alt={alt}
-    class:list={["h-full w-full object-contain", imageClassName]}
-    draggable="false"
-    src="/logo.svg"
+  <span
+    role={alt ? "img" : undefined}
+    aria-label={alt ? alt : undefined}
+    aria-hidden={!alt ? "true" : undefined}
+    class:list={["block h-full w-full [&_svg]:h-full [&_svg]:w-full", imageClassName]}
+    set:html={logoSvg}
   />
 </span>

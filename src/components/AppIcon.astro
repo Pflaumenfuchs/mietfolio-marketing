@@ -1,4 +1,6 @@
 ---
+import logoRaw from "../../public/logo.svg?raw";
+
 interface Props {
   alt?: string;
   className?: string;
@@ -8,10 +10,11 @@ interface Props {
 const { alt = "", className = "", imageClassName = "" } = Astro.props;
 ---
 <span class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}>
-  <img
-    alt={alt}
-    class:list={["h-full w-full object-contain", imageClassName]}
-    draggable="false"
-    src="/logo.svg"
+  {/* ⚡ Bolt: Inlining the SVG manually to avoid an extra HTTP request for LCP/FCP, since vite.build.assetsInlineLimit is 0 */}
+  <span
+    aria-label={alt}
+    class:list={["h-full w-full [&_svg]:h-full [&_svg]:w-full [&_svg]:object-contain", imageClassName]}
+    role="img"
+    set:html={logoRaw}
   />
 </span>

@@ -1,4 +1,6 @@
 ---
+import logo from '../../public/logo.svg?raw';
+
 interface Props {
   alt?: string;
   className?: string;
@@ -8,10 +10,11 @@ interface Props {
 const { alt = "", className = "", imageClassName = "" } = Astro.props;
 ---
 <span class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}>
-  <img
-    alt={alt}
-    class:list={["h-full w-full object-contain", imageClassName]}
-    draggable="false"
-    src="/logo.svg"
+  <!-- ⚡ Bolt Optimization: Manually inline the SVG to avoid extra network request since assetsInlineLimit=0 -->
+  <span
+    aria-label={alt}
+    role={alt ? "img" : "presentation"}
+    class:list={["block h-full w-full [&_svg]:h-full [&_svg]:w-full [&_svg]:object-contain", imageClassName]}
+    set:html={logo}
   />
 </span>

@@ -1,4 +1,6 @@
 ---
+import logoSvg from "../../public/logo.svg?raw";
+
 interface Props {
   alt?: string;
   className?: string;
@@ -8,10 +10,13 @@ interface Props {
 const { alt = "", className = "", imageClassName = "" } = Astro.props;
 ---
 <span class:list={["inline-flex shrink-0 items-center justify-center overflow-hidden rounded-lg bg-white", className]}>
-  <img
-    alt={alt}
-    class:list={["h-full w-full object-contain", imageClassName]}
-    draggable="false"
-    src="/logo.svg"
+  {/* Inline SVG manually using set:html to avoid network requests and improve LCP.
+      Applying ARIA attributes and classes on the wrapper to keep the SVG safe from regex. */}
+  <span
+    class:list={["[&>svg]:h-full [&>svg]:w-full [&>svg]:object-contain", imageClassName]}
+    aria-label={alt || undefined}
+    role={alt ? "img" : undefined}
+    aria-hidden={!alt ? "true" : undefined}
+    set:html={logoSvg}
   />
 </span>
